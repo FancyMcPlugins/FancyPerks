@@ -1,0 +1,8 @@
+name: FancyPerks
+main: de.oliver.FancyPerks
+author: OliverHD
+version: 1.0.0
+api-version: 1.19
+commands:
+  FancyPerks:
+  Perks:
