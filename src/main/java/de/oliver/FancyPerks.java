@@ -1,6 +1,7 @@
 package de.oliver;
 
 import de.oliver.commands.PerksCMD;
+import de.oliver.listeners.EntityPotionEffectListener;
 import de.oliver.listeners.PlayerJoinListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -22,6 +23,7 @@ public class FancyPerks extends JavaPlugin {
 
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new PlayerJoinListener(), instance);
+        pluginManager.registerEvents(new EntityPotionEffectListener(), instance);
     }
 
     @Override
