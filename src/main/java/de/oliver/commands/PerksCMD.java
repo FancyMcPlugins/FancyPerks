@@ -13,7 +13,7 @@ public class PerksCMD implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Player p = (Player) sender;
 
-        PerkRegistry.NIGHT_VISION.grant(p);
+        PerkRegistry.KEEP_EXP.grant(p);
 
         return false;
     }
