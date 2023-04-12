@@ -22,11 +22,15 @@ public class EntityDamageListener implements Listener {
         PerkManager perkManager = FancyPerks.getInstance().getPerkManager();
         List<Perk> perks = perkManager.getEnabledPerks(p);
 
-        boolean hasKeepExp = perks.contains(PerkRegistry.NO_FIRE_DAMAGE);
-        if(hasKeepExp && event.getCause().name().toLowerCase().contains("fire")){
+        boolean hasNoFireDamage = perks.contains(PerkRegistry.NO_FIRE_DAMAGE);
+        if(hasNoFireDamage && event.getCause().name().toLowerCase().contains("fire")){
             event.setDamage(0);
         }
 
+        boolean hasNoFallDamage = perks.contains(PerkRegistry.NO_FALL_DAMAGE);
+        if(hasNoFallDamage && event.getCause() == EntityDamageEvent.DamageCause.FALL){
+            event.setDamage(0);
+        }
     }
 
 }
