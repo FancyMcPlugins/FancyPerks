@@ -1,6 +1,6 @@
 package de.oliver.commands;
 
-import de.oliver.perks.PerkRegistry;
+import de.oliver.gui.customInventories.impl.PerksInventory;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,7 +13,8 @@ public class PerksCMD implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Player p = (Player) sender;
 
-        PerkRegistry.KEEP_EXP.grant(p);
+        PerksInventory perksInventory = new PerksInventory(p);
+        p.openInventory(perksInventory.getInventory());
 
         return false;
     }

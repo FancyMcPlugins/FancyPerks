@@ -1,7 +1,9 @@
 package de.oliver;
 
 import de.oliver.commands.PerksCMD;
+import de.oliver.gui.inventoryClick.ItemClickRegistry;
 import de.oliver.listeners.EntityPotionEffectListener;
+import de.oliver.listeners.InventoryClickListener;
 import de.oliver.listeners.PlayerDeathListener;
 import de.oliver.listeners.PlayerJoinListener;
 import org.bukkit.Bukkit;
@@ -26,6 +28,9 @@ public class FancyPerks extends JavaPlugin {
         pluginManager.registerEvents(new PlayerJoinListener(), instance);
         pluginManager.registerEvents(new EntityPotionEffectListener(), instance);
         pluginManager.registerEvents(new PlayerDeathListener(), instance);
+        pluginManager.registerEvents(new InventoryClickListener(), instance);
+
+        ItemClickRegistry.register();
     }
 
     @Override
