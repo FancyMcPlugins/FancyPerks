@@ -18,7 +18,7 @@ public class PlayerDeathListener implements Listener {
         Player p = event.getPlayer();
         
         PerkManager perkManager = FancyPerks.getInstance().getPerkManager();
-        List<Perk> perks = perkManager.getPerks(p);
+        List<Perk> perks = perkManager.getEnabledPerks(p);
 
 
         boolean hasKeepExp = perks.contains(PerkRegistry.KEEP_EXP);

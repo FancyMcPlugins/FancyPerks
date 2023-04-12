@@ -19,7 +19,7 @@ public class PlayerJoinListener implements Listener {
         Player p = event.getPlayer();
 
         PerkManager perkManager = FancyPerks.getInstance().getPerkManager();
-        List<Perk> perks = perkManager.getPerks(event.getPlayer());
+        List<Perk> perks = perkManager.getEnabledPerks(event.getPlayer());
 
         for (Perk perk : perks) {
             if(perk instanceof EffectPerk effectPerk){

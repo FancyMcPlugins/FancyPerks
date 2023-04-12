@@ -13,16 +13,16 @@ public class PerkManager {
         this.playerPerks = new HashMap<>();
     }
 
-    public List<Perk> getPerks(Player player){
+    public List<Perk> getEnabledPerks(Player player){
         return playerPerks.getOrDefault(player.getUniqueId(), new ArrayList<>());
     }
 
-    public boolean hasPerk(Player player, Perk perk){
+    public boolean hasPerkEnabled(Player player, Perk perk){
         return playerPerks.containsKey(player.getUniqueId()) && playerPerks.get(player.getUniqueId()).contains(perk);
     }
 
-    public void addPerk(Player player, Perk perk){
-        List<Perk> perks = getPerks(player);
+    public void enablePerk(Player player, Perk perk){
+        List<Perk> perks = getEnabledPerks(player);
         if(!perks.contains(perk)){
             perks.add(perk);
         }
@@ -30,8 +30,8 @@ public class PerkManager {
         playerPerks.put(player.getUniqueId(), perks);
     }
 
-    public void removePerk(Player player, Perk perk){
-        List<Perk> perks = getPerks(player);
+    public void disablePerk(Player player, Perk perk){
+        List<Perk> perks = getEnabledPerks(player);
         perks.remove(perk);
 
         playerPerks.put(player.getUniqueId(), perks);

@@ -20,7 +20,7 @@ public class EntityPotionEffectListener implements Listener {
         }
 
         PerkManager perkManager = FancyPerks.getInstance().getPerkManager();
-        List<Perk> perks = perkManager.getPerks(p);
+        List<Perk> perks = perkManager.getEnabledPerks(p);
 
         for (Perk perk : perks) {
             if(perk instanceof EffectPerk effectPerk){

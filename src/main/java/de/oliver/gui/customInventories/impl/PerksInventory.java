@@ -52,7 +52,7 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
                 Perk perk = perks.get(perkIndex);
                 perkIndex++;
 
-                boolean hasPerk = FancyPerks.getInstance().getPerkManager().hasPerk(player, perk);
+                boolean hasPerk = FancyPerks.getInstance().getPerkManager().hasPerkEnabled(player, perk);
 
                 inventory.setItem(topIndex, perk.getDisplayItem());
 

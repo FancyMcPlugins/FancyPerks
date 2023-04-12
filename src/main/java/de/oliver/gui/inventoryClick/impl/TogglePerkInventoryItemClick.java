@@ -6,6 +6,7 @@ import de.oliver.gui.inventoryClick.InventoryItemClick;
 import de.oliver.perks.Perk;
 import de.oliver.perks.PerkRegistry;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -45,16 +46,19 @@ public class TogglePerkInventoryItemClick implements InventoryItemClick {
                 return;
             }
 
-            boolean hasPerk = FancyPerks.getInstance().getPerkManager().hasPerk(p, perk);
+            boolean hasPerk = FancyPerks.getInstance().getPerkManager().hasPerkEnabled(p, perk);
 
             if(hasPerk){
                 perk.revoke(p);
                 event.setCurrentItem(PerksInventory.getDisabledPerkItem(perk));
-                p.sendMessage(Component.text("Revoked " + perk.getName()));
             } else {
+                if(!p.hasPermission("FancyPerks.perk." + perk.getSystemName())){
+                    p.sendMessage(Component.text("You don't have permission to use this perk").color(TextColor.color(255,0,0)));
+                    return;
+                }
+
                 perk.grant(p);
                 event.setCurrentItem(PerksInventory.getEnabledPerkItem(perk));
-                p.sendMessage(Component.text("Granted " + perk.getName()));
             }
         }
     }

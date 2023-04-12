@@ -20,7 +20,7 @@ public class FoodLevelChangeListener implements Listener {
         }
 
         PerkManager perkManager = FancyPerks.getInstance().getPerkManager();
-        List<Perk> perks = perkManager.getPerks(p);
+        List<Perk> perks = perkManager.getEnabledPerks(p);
 
         int i = perks.indexOf(PerkRegistry.NO_HUNGER);
 

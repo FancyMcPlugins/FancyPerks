@@ -20,11 +20,13 @@ public abstract class Perk {
     protected static final PerkManager perkManager = FancyPerks.getInstance().getPerkManager();
 
     protected final String name;
+    protected final String systemName;
     protected final String description;
     protected final ItemStack displayItem;
 
     public Perk(String name, String description, ItemStack displayItem) {
         this.name = name;
+        this.systemName = name.replaceAll(" ", "_").toLowerCase();
         this.description = description;
         this.displayItem = displayItem;
 
@@ -39,11 +41,11 @@ public abstract class Perk {
     }
 
     public void grant(Player player){
-        perkManager.addPerk(player, this);
+        perkManager.enablePerk(player, this);
     }
 
     public void revoke(Player player){
-        perkManager.removePerk(player, this);
+        perkManager.disablePerk(player, this);
     }
 
     public ItemStack getDisplayItem() {
@@ -52,6 +54,10 @@ public abstract class Perk {
 
     public String getName() {
         return name;
+    }
+
+    public String getSystemName() {
+        return systemName;
     }
 
     public String getDescription() {
