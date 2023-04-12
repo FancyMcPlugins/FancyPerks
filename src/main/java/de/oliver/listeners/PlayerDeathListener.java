@@ -20,14 +20,18 @@ public class PlayerDeathListener implements Listener {
         PerkManager perkManager = FancyPerks.getInstance().getPerkManager();
         List<Perk> perks = perkManager.getPerks(p);
 
-        int i = perks.indexOf(PerkRegistry.KEEP_EXP);
 
-        if(i == -1){
-            return;
+        boolean hasKeepExp = perks.contains(PerkRegistry.KEEP_EXP);
+        if(hasKeepExp){
+            event.setKeepLevel(true);
+            event.setShouldDropExperience(false);
         }
 
-        event.setKeepLevel(true);
-        event.setShouldDropExperience(false);
+        boolean hasKeepInv = perks.contains(PerkRegistry.KEEP_INVENTORY);
+        if(hasKeepInv){
+            event.setKeepInventory(true);
+            event.getDrops().clear();
+        }
     }
     
 }

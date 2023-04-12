@@ -2,7 +2,7 @@ package de.oliver.listeners;
 
 import de.oliver.FancyPerks;
 import de.oliver.PerkManager;
-import de.oliver.perks.EffectPerk;
+import de.oliver.perks.impl.EffectPerk;
 import de.oliver.perks.Perk;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

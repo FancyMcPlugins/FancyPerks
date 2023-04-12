@@ -1,5 +1,6 @@
-package de.oliver.perks;
+package de.oliver.perks.impl;
 
+import de.oliver.perks.Perk;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
