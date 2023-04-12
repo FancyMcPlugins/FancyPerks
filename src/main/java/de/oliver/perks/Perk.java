@@ -2,12 +2,14 @@ package de.oliver.perks;
 
 import de.oliver.FancyPerks;
 import de.oliver.PerkManager;
+import de.oliver.gui.inventoryClick.InventoryItemClick;
 import de.oliver.utils.MessageHelper;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Arrays;
 
@@ -31,6 +33,8 @@ public abstract class Perk {
             itemMeta.lore(Arrays.asList(
                     MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<gray>" + description + "</gray>"), TextDecoration.ITALIC)
             ));
+
+            itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "cancelClick");
         });
     }
 

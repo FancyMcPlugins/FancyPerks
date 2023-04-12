@@ -2,10 +2,7 @@ package de.oliver;
 
 import de.oliver.commands.PerksCMD;
 import de.oliver.gui.inventoryClick.ItemClickRegistry;
-import de.oliver.listeners.EntityPotionEffectListener;
-import de.oliver.listeners.InventoryClickListener;
-import de.oliver.listeners.PlayerDeathListener;
-import de.oliver.listeners.PlayerJoinListener;
+import de.oliver.listeners.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,6 +26,7 @@ public class FancyPerks extends JavaPlugin {
         pluginManager.registerEvents(new EntityPotionEffectListener(), instance);
         pluginManager.registerEvents(new PlayerDeathListener(), instance);
         pluginManager.registerEvents(new InventoryClickListener(), instance);
+        pluginManager.registerEvents(new FoodLevelChangeListener(), instance);
 
         ItemClickRegistry.register();
     }
