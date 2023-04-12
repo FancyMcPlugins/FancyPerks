@@ -1,6 +1,7 @@
 package de.oliver.perks;
 
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -8,8 +9,8 @@ public class EffectPerk extends Perk {
 
     private final PotionEffectType effectType;
 
-    public EffectPerk(String name, String description, PotionEffectType effectType) {
-        super(name, description);
+    public EffectPerk(String name, String description, ItemStack displayName, PotionEffectType effectType) {
+        super(name, description, displayName);
         this.effectType = effectType;
     }
 

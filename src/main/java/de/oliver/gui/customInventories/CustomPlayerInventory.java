@@ -1,10 +1,14 @@
 package de.oliver.gui.customInventories;
 
+import de.oliver.gui.inventoryClick.InventoryItemClick;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class CustomPlayerInventory implements InventoryHolder {
@@ -25,5 +29,15 @@ public abstract class CustomPlayerInventory implements InventoryHolder {
     @Override
     public Inventory getInventory() {
         return inventory;
+    }
+
+    public static ItemStack getPlaceholder(){
+        ItemStack item = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
+        item.editMeta(itemMeta -> {
+            itemMeta.displayName(Component.empty());
+            itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "cancelClick");
+        });
+
+        return item;
     }
 }

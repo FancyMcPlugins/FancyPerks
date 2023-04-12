@@ -1,6 +1,7 @@
 package de.oliver.gui.inventoryClick.impl;
 
 import de.oliver.FancyPerks;
+import de.oliver.gui.customInventories.impl.PerksInventory;
 import de.oliver.gui.inventoryClick.InventoryItemClick;
 import de.oliver.perks.Perk;
 import de.oliver.perks.PerkRegistry;
@@ -14,19 +15,19 @@ import org.bukkit.persistence.PersistentDataType;
 import java.util.Collections;
 import java.util.List;
 
-public class PerkInventoryItemClick implements InventoryItemClick {
+public class TogglePerkInventoryItemClick implements InventoryItemClick {
 
-    public static final PerkInventoryItemClick INSTANCE = new PerkInventoryItemClick();
+    public static final TogglePerkInventoryItemClick INSTANCE = new TogglePerkInventoryItemClick();
 
     private final static List<NamespacedKey> REQUIRED_KEYS = Collections.singletonList(
             Perk.PERK_KEY
     );
 
-    private PerkInventoryItemClick(){ }
+    private TogglePerkInventoryItemClick(){ }
 
     @Override
     public String getId() {
-        return "perk";
+        return "togglePerk";
     }
 
     @Override
@@ -48,9 +49,11 @@ public class PerkInventoryItemClick implements InventoryItemClick {
 
             if(hasPerk){
                 perk.revoke(p);
+                event.setCurrentItem(PerksInventory.getDisabledPerkItem(perk));
                 p.sendMessage(Component.text("Revoked " + perk.getName()));
             } else {
                 perk.grant(p);
+                event.setCurrentItem(PerksInventory.getEnabledPerkItem(perk));
                 p.sendMessage(Component.text("Granted " + perk.getName()));
             }
         }

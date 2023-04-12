@@ -1,7 +1,8 @@
 package de.oliver.gui.inventoryClick;
 
+import de.oliver.gui.inventoryClick.impl.CancelInventoryItemClick;
 import de.oliver.gui.inventoryClick.impl.ChangePageInventoryItemClick;
-import de.oliver.gui.inventoryClick.impl.PerkInventoryItemClick;
+import de.oliver.gui.inventoryClick.impl.TogglePerkInventoryItemClick;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +22,8 @@ public class ItemClickRegistry {
 
     public static void register(){
         registerInventoryItemClick(ChangePageInventoryItemClick.INSTANCE);
-        registerInventoryItemClick(PerkInventoryItemClick.INSTANCE);
+        registerInventoryItemClick(TogglePerkInventoryItemClick.INSTANCE);
+        registerInventoryItemClick(CancelInventoryItemClick.INSTANCE);
     }
 
 }

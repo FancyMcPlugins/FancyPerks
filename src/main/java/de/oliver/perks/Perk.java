@@ -2,13 +2,14 @@ package de.oliver.perks;
 
 import de.oliver.FancyPerks;
 import de.oliver.PerkManager;
-import de.oliver.gui.inventoryClick.InventoryItemClick;
-import net.kyori.adventure.text.Component;
-import org.bukkit.Material;
+import de.oliver.utils.MessageHelper;
+import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataType;
+
+import java.util.Arrays;
 
 public abstract class Perk {
 
@@ -18,10 +19,19 @@ public abstract class Perk {
 
     protected final String name;
     protected final String description;
+    protected final ItemStack displayItem;
 
-    public Perk(String name, String description) {
+    public Perk(String name, String description, ItemStack displayItem) {
         this.name = name;
         this.description = description;
+        this.displayItem = displayItem;
+
+        displayItem.editMeta(itemMeta -> {
+            itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<green>" + name + "</green>"), TextDecoration.ITALIC));
+            itemMeta.lore(Arrays.asList(
+                    MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<gray>" + description + "</gray>"), TextDecoration.ITALIC)
+            ));
+        });
     }
 
     public void grant(Player player){
@@ -32,16 +42,8 @@ public abstract class Perk {
         perkManager.removePerk(player, this);
     }
 
-    public ItemStack getDisplayItem(Player player){
-        ItemStack item = new ItemStack(Material.DIAMOND);
-        item.editMeta(itemMeta -> {
-            itemMeta.displayName(Component.text(name));
-
-            itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "perk");
-            itemMeta.getPersistentDataContainer().set(PERK_KEY, PersistentDataType.STRING, name);
-        });
-
-        return item;
+    public ItemStack getDisplayItem() {
+        return displayItem;
     }
 
     public String getName() {

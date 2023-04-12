@@ -1,5 +1,6 @@
 package de.oliver.gui.customInventories.impl;
 
+import de.oliver.FancyPerks;
 import de.oliver.gui.customInventories.CustomPlayerInventory;
 import de.oliver.gui.customInventories.PageInventory;
 import de.oliver.gui.inventoryClick.InventoryItemClick;
@@ -26,26 +27,36 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
     public void loadPage(int page) {
         inventory.clear();
 
+        for (int i = 0; i < inventory.getSize(); i++) {
+            inventory.setItem(i, CustomPlayerInventory.getPlaceholder());
+        }
+
         List<Perk> perks = PerkRegistry.ALL_PERKS;
-        final int itemsPerPage = 5*9;
-
-//        for (int i = 0; i < inventory.getSize(); i++) {
-//            inventory.setItem(i, InventoryUtils.getPlaceholder());
-//        }
-
+        final int perksPerPage = 2*9;
+        int perkIndex = perksPerPage * Math.max(0, page-1);
         boolean isLastPage = false;
 
-        for (int i = 0; i < itemsPerPage; i++) {
-            int index = (page-1) * itemsPerPage + i;
+        rowLoop:
+        for (int row = 0; row < 4; row+=2) {
+            for (int col = 0; col < 9; col++) {
+                if(perkIndex >= perks.size()){
+                    isLastPage = true;
+                    break rowLoop;
+                }
 
-            if(perks.size() <= index){
-                isLastPage = true;
-                break;
+                int topIndex = row*9+col;
+                int bottomIndex = topIndex+9;
+
+                Perk perk = perks.get(perkIndex);
+                perkIndex++;
+
+                boolean hasPerk = FancyPerks.getInstance().getPerkManager().hasPerk(player, perk);
+
+                inventory.setItem(topIndex, perk.getDisplayItem());
+
+                if(hasPerk) inventory.setItem(bottomIndex, getEnabledPerkItem(perk));
+                else inventory.setItem(bottomIndex, getDisabledPerkItem(perk));
             }
-
-            Perk perk = perks.get(index);
-
-            inventory.setItem(i, perk.getDisplayItem(player));
         }
 
         if(page > 1) {
@@ -71,5 +82,31 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
 
             inventory.setItem(52, nextPage);
         }
+    }
+
+    public static ItemStack getEnabledPerkItem(Perk perk){
+        ItemStack item = new ItemStack(Material.GREEN_DYE);
+
+        item.editMeta(itemMeta -> {
+            itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<gradient:dark_green:green>Click to disable</gradient>"), TextDecoration.ITALIC));
+
+            itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "togglePerk");
+            itemMeta.getPersistentDataContainer().set(Perk.PERK_KEY, PersistentDataType.STRING, perk.getName());
+        });
+
+        return item;
+    }
+
+    public static ItemStack getDisabledPerkItem(Perk perk){
+        ItemStack item = new ItemStack(Material.RED_DYE);
+
+        item.editMeta(itemMeta -> {
+            itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<gradient:dark_red:red>Click to enable</gradient>"), TextDecoration.ITALIC));
+
+            itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "togglePerk");
+            itemMeta.getPersistentDataContainer().set(Perk.PERK_KEY, PersistentDataType.STRING, perk.getName());
+        });
+
+        return item;
     }
 }
