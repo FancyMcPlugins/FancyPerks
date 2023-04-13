@@ -1,12 +1,11 @@
 package de.oliver.fancyperks.gui.inventoryClick.impl;
 
+import de.oliver.fancylib.MessageHelper;
 import de.oliver.fancyperks.FancyPerks;
 import de.oliver.fancyperks.gui.customInventories.impl.PerksInventory;
 import de.oliver.fancyperks.gui.inventoryClick.InventoryItemClick;
 import de.oliver.fancyperks.perks.Perk;
 import de.oliver.fancyperks.perks.PerkRegistry;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -53,7 +52,7 @@ public class TogglePerkInventoryItemClick implements InventoryItemClick {
                 event.setCurrentItem(PerksInventory.getDisabledPerkItem(perk));
             } else {
                 if(!p.hasPermission("FancyPerks.perk." + perk.getSystemName())){
-                    p.sendMessage(Component.text("You don't have permission to use this perk").color(TextColor.color(255,0,0)));
+                    MessageHelper.error(p, "You don't have permission to use this perk");
                     return;
                 }
 
