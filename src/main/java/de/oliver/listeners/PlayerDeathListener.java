@@ -32,6 +32,11 @@ public class PlayerDeathListener implements Listener {
             event.setKeepInventory(true);
             event.getDrops().clear();
         }
+
+        boolean hasFly = perks.contains(PerkRegistry.FLY);
+        if(hasFly){
+            p.setAllowFlight(true);
+        }
     }
     
 }
