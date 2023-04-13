@@ -3,6 +3,7 @@ package de.oliver.fancyperks;
 import de.oliver.fancylib.MessageHelper;
 import de.oliver.fancylib.Metrics;
 import de.oliver.fancylib.VersionFetcher;
+import de.oliver.fancyperks.commands.FancyPerksCMD;
 import de.oliver.fancyperks.commands.PerksCMD;
 import de.oliver.fancyperks.gui.inventoryClick.ItemClickRegistry;
 import de.oliver.fancyperks.listeners.*;
@@ -36,7 +37,7 @@ public class FancyPerks extends JavaPlugin {
                 getLogger().warning("Could not fetch latest plugin version");
             } else if (newestVersion.compareTo(currentVersion) > 0) {
                 getLogger().warning("-------------------------------------------------------");
-                getLogger().warning("You are not using the latest version the FancyNpcs plugin.");
+                getLogger().warning("You are not using the latest version the FancyPerks plugin.");
                 getLogger().warning("Please update to the newest version (" + newestVersion + ").");
                 getLogger().warning(versionFetcher.getDownloadUrl());
                 getLogger().warning("-------------------------------------------------------");
@@ -57,6 +58,7 @@ public class FancyPerks extends JavaPlugin {
 
         Metrics metrics = new Metrics(instance, 18195);
 
+        getCommand("fancyperks").setExecutor(new FancyPerksCMD());
         getCommand("perks").setExecutor(new PerksCMD());
 
         pluginManager.registerEvents(new PlayerJoinListener(), instance);
