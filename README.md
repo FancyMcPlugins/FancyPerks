@@ -1,4 +1,4 @@
-[![Generic badge](https://img.shields.io/badge/version-1.0.0_dev-green.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/version-1.0.0-green.svg)](https://shields.io/)
 
 # Fancy Perks
 A simple plugin that adds some fancy perks to your server.
@@ -18,9 +18,9 @@ You can download the latest versions at the following places:
 ## Commands
 
 /perks - Opens the perks gui<br>
-/perks activate (perk | *) - Activates the perk<br>
-/perks deactivate (perk | *) - Deactivates the perk<br>
-/fancyperks verison - _Shows the current version_<br>
+/perks activate (perk | *) - _Activates the perk_<br>
+/perks deactivate (perk | *) - _Deactivates the perk_<br>
+/fancyperks version - _Shows the current version_<br>
 /fancyperks reload - _Reloads the config_<br>
 
 
