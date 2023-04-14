@@ -19,11 +19,13 @@ public class FancyPerks extends JavaPlugin {
     private static FancyPerks instance;
     private final PerkManager perkManager;
     private final VersionFetcher versionFetcher;
+    private final FancyPerksConfig config;
 
     public FancyPerks() {
         instance = this;
         perkManager = new PerkManager();
         versionFetcher = new VersionFetcher("https://api.modrinth.com/v2/project/fancyperks/version", "https://modrinth.com/plugin/fancyperks/versions");
+        config = new FancyPerksConfig();
     }
 
     @Override
@@ -58,6 +60,8 @@ public class FancyPerks extends JavaPlugin {
 
         Metrics metrics = new Metrics(instance, 18195);
 
+        config.reload();
+
         getCommand("fancyperks").setExecutor(new FancyPerksCMD());
         getCommand("perks").setExecutor(new PerksCMD());
 
@@ -82,6 +86,11 @@ public class FancyPerks extends JavaPlugin {
 
     public VersionFetcher getVersionFetcher() {
         return versionFetcher;
+    }
+
+
+    public FancyPerksConfig getFanyPerksConfig() {
+        return config;
     }
 
     public static FancyPerks getInstance() {

@@ -18,7 +18,7 @@ public class FancyPerksCMD implements CommandExecutor, TabCompleter {
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if(args.length == 1){
-            return Stream.of("version").filter(input -> input.startsWith(args[0].toLowerCase())).toList();
+            return Stream.of("version", "reload").filter(input -> input.startsWith(args[0].toLowerCase())).toList();
         }
 
         return null;
@@ -41,6 +41,9 @@ public class FancyPerksCMD implements CommandExecutor, TabCompleter {
                     MessageHelper.success(sender, "You are using the latest version of the FancyPerks Plugin (" + currentVersion + ")");
                 }
             }).start();
+        } else if(args.length >= 1 && args[0].equalsIgnoreCase("reload")){
+            FancyPerks.getInstance().getFanyPerksConfig().reload();
+            MessageHelper.success(sender, "Reloaded the config");
         }
 
         return false;

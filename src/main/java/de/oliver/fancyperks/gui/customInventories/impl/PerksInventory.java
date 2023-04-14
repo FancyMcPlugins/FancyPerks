@@ -17,6 +17,7 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class PerksInventory extends CustomPlayerInventory implements PageInventory {
     public PerksInventory(Player player) {
@@ -33,7 +34,8 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
             inventory.setItem(i, CustomPlayerInventory.getPlaceholder());
         }
 
-        List<Perk> perks = PerkRegistry.ALL_PERKS;
+        Map<Perk, Boolean> isPerkEnabled = FancyPerks.getInstance().getFanyPerksConfig().getPerks();
+        List<Perk> perks = PerkRegistry.ALL_PERKS.stream().filter(perk -> isPerkEnabled.getOrDefault(perk, true)).toList();
         final int perksPerPage = 2*9;
         int perkIndex = perksPerPage * Math.max(0, page-1);
         boolean isLastPage = false;
