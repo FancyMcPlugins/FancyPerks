@@ -1,9 +1,9 @@
 package de.oliver.fancyperks.perks;
 
+import de.oliver.fancylib.MessageHelper;
 import de.oliver.fancyperks.FancyPerks;
 import de.oliver.fancyperks.PerkManager;
 import de.oliver.fancyperks.gui.inventoryClick.InventoryItemClick;
-import de.oliver.fancyperks.utils.MessageHelper;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.NamespacedKey;

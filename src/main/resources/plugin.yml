@@ -7,3 +7,5 @@ commands:
   FancyPerks:
     permission: FancyPerks.admin
   Perks:
+    aliases:
+      - perk

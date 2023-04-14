@@ -39,7 +39,7 @@ public class PerkRegistry {
 
     public static Perk getPerkByName(String name){
         for (Perk perk : ALL_PERKS) {
-            if(perk.getName().equalsIgnoreCase(name.replaceAll("_", " "))){
+            if(perk.getName().equalsIgnoreCase(name.replaceAll("_", " ")) || perk.getSystemName().equalsIgnoreCase(name)){
                 return perk;
             }
         }
