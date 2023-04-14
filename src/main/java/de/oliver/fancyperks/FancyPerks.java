@@ -73,6 +73,7 @@ public class FancyPerks extends JavaPlugin {
         pluginManager.registerEvents(new EntityDamageListener(), instance);
 
         ItemClickRegistry.register();
+        perkManager.loadFromConfig();
     }
 
     @Override
