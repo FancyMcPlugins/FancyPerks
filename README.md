@@ -29,6 +29,5 @@ You can download the latest versions at the following places:
 To use a perk - ``fancyperks.perk.(perk name)``<br>
 
 ## Build from source
-1. Clone [FancyLib](https://github.com/FancyMcPlugins/FancyLib) repo and run `gradlew publishToMavenLocal`
-2. Clone this repo and run `gradlew reobfJar`
-3. The jar file will be in `build/libs/FancyPerks-<version>.jar`
+1. Clone this repo and run `gradlew reobfJar`
+2. The jar file will be in `build/libs/FancyPerks-<version>.jar`
