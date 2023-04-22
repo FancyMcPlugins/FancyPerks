@@ -41,11 +41,11 @@ To use a perk - ``fancyperks.perk.(perk name)``<br>
 - No Fall Damage
 - Double exp
 - Strength
+- Double mob drops
 
   Planned:
 - Telekinesis
 - Instant smelt
-- Double monster drops
 - Player glow
 - God (no damage)
 - Double attack damage

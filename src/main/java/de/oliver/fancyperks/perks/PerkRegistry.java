@@ -24,6 +24,7 @@ public class PerkRegistry {
     public static final Perk NO_FIRE_DAMAGE = new SimplePerk("No Fire Damage", "Don't get hurt by fire", new ItemStack(Material.FIRE_CHARGE));
     public static final Perk NO_FALL_DAMAGE = new SimplePerk("No Fall Damage", "Don't get hurt by fall damage", new ItemStack(Material.SLIME_BLOCK));
     public static final Perk DOUBLE_EXP = new SimplePerk("Double Exp", "Receive double exp for killing monsters", new ItemStack(Material.EXPERIENCE_BOTTLE));
+    public static final Perk DOUBLE_DROPS = new SimplePerk("Double Mob Drops", "Receive double drops for killing Mobs", new ItemStack(Material.ROTTEN_FLESH));
 
     public static final List<Perk> ALL_PERKS = new ArrayList<>();
 
@@ -39,6 +40,7 @@ public class PerkRegistry {
         ALL_PERKS.add(NO_FIRE_DAMAGE);
         ALL_PERKS.add(NO_FALL_DAMAGE);
         ALL_PERKS.add(DOUBLE_EXP);
+        ALL_PERKS.add(DOUBLE_DROPS);
     }
 
     public static Perk getPerkByName(String name){

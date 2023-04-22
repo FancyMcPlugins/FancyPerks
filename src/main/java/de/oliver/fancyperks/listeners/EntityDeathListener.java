@@ -1,6 +1,5 @@
 package de.oliver.fancyperks.listeners;
 
-import de.oliver.fancylib.MessageHelper;
 import de.oliver.fancyperks.FancyPerks;
 import de.oliver.fancyperks.PerkManager;
 import de.oliver.fancyperks.perks.Perk;
@@ -25,9 +24,14 @@ public class EntityDeathListener implements Listener {
         PerkManager perkManager = FancyPerks.getInstance().getPerkManager();
         List<Perk> perks = perkManager.getEnabledPerks(p);
 
-        boolean hasNoFireDamage = perks.contains(PerkRegistry.DOUBLE_EXP);
-        if(hasNoFireDamage){
+        boolean hasDoubleExp = perks.contains(PerkRegistry.DOUBLE_EXP);
+        if(hasDoubleExp){
             event.setDroppedExp(event.getDroppedExp() * 2);
+        }
+
+        boolean hasDoubleDrops = perks.contains(PerkRegistry.DOUBLE_DROPS);
+        if(hasDoubleDrops){
+            event.getDrops().forEach(itemStack -> itemStack.setAmount(itemStack.getAmount() * 2));
         }
     }
 
