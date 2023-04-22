@@ -22,6 +22,12 @@ public class EntityDamageListener implements Listener {
         PerkManager perkManager = FancyPerks.getInstance().getPerkManager();
         List<Perk> perks = perkManager.getEnabledPerks(p);
 
+        boolean hasGod = perks.contains(PerkRegistry.GOD);
+        if(hasGod){
+            event.setDamage(0);
+            return;
+        }
+
         boolean hasNoFireDamage = perks.contains(PerkRegistry.NO_FIRE_DAMAGE);
         if(hasNoFireDamage && event.getCause().name().toLowerCase().contains("fire")){
             event.setDamage(0);

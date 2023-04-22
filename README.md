@@ -42,13 +42,12 @@ To use a perk - ``fancyperks.perk.(perk name)``<br>
 - Double exp
 - Strength
 - Double mob drops
+- God (no damage)
 
   Planned:
 - Telekinesis
 - Instant smelt
 - Player glow
-- God (no damage)
-- Double attack damage
 
 ## Build from source
 1. Clone this repo and run `gradlew reobfJar`
