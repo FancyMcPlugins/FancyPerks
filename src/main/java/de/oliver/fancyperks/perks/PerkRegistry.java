@@ -16,6 +16,7 @@ public class PerkRegistry {
     public static final Perk FAST_DIGGING = new EffectPerk("Fast Digging", "Gives you the haste effect", new ItemStack(Material.NETHERITE_PICKAXE), PotionEffectType.FAST_DIGGING);
     public static final Perk NIGHT_VISION = new EffectPerk("Night Vision", "Gives you the night vision effect", new ItemStack(Material.SPYGLASS), PotionEffectType.NIGHT_VISION);
     public static final Perk WATER_BREATHING = new EffectPerk("Water Breathing", "Gives you the water breathing effect", new ItemStack(Material.WATER_BUCKET), PotionEffectType.WATER_BREATHING);
+    public static final Perk STRENGTH = new EffectPerk("Strength", "Gives you the strength effect", new ItemStack(Material.DIAMOND_SWORD), PotionEffectType.INCREASE_DAMAGE);
     public static final Perk KEEP_EXP = new SimplePerk("Keep EXP", "Don't lose your exp after dying", new ItemStack(Material.EXPERIENCE_BOTTLE));
     public static final Perk FLY = new FlyPerk("Fly", "Gives you the ability to fly", new ItemStack(Material.ELYTRA));
     public static final Perk NO_HUNGER = new NoHungerPerk("No Hunger", "You don't need to eat again", new ItemStack(Material.COOKED_CHICKEN));
@@ -30,6 +31,7 @@ public class PerkRegistry {
         ALL_PERKS.add(FAST_DIGGING);
         ALL_PERKS.add(NIGHT_VISION);
         ALL_PERKS.add(WATER_BREATHING);
+        ALL_PERKS.add(STRENGTH);
         ALL_PERKS.add(KEEP_EXP);
         ALL_PERKS.add(FLY);
         ALL_PERKS.add(NO_HUNGER);

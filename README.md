@@ -40,11 +40,11 @@ To use a perk - ``fancyperks.perk.(perk name)``<br>
 - No Fire Damage
 - No Fall Damage
 - Double exp
+- Strength
 
   Planned:
 - Telekinesis
 - Instant smelt
-- Strength
 - Double monster drops
 - Player glow
 - God (no damage)
