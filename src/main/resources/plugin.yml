@@ -3,6 +3,10 @@ main: de.oliver.fancyperks.FancyPerks
 author: OliverHD
 version: 1.0.0
 api-version: 1.19
+loadbefore:
+  - Vault
+  - Essentials
+  - LuckPerms
 commands:
   FancyPerks:
     permission: FancyPerks.admin

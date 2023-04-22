@@ -17,7 +17,6 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class PerksInventory extends CustomPlayerInventory implements PageInventory {
     public PerksInventory(Player player) {
@@ -34,8 +33,7 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
             inventory.setItem(i, CustomPlayerInventory.getPlaceholder());
         }
 
-        Map<Perk, Boolean> isPerkEnabled = FancyPerks.getInstance().getFanyPerksConfig().getPerks();
-        List<Perk> perks = PerkRegistry.ALL_PERKS.stream().filter(perk -> isPerkEnabled.getOrDefault(perk, true)).toList();
+        List<Perk> perks = PerkRegistry.ALL_PERKS.stream().filter(Perk::isEnabled).toList();
         final int perksPerPage = 2*9;
         int perkIndex = perksPerPage * Math.max(0, page-1);
         boolean isLastPage = false;
@@ -54,12 +52,18 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
                 Perk perk = perks.get(perkIndex);
                 perkIndex++;
 
-                boolean hasPerk = FancyPerks.getInstance().getPerkManager().hasPerkEnabled(player, perk);
+                boolean enabled = FancyPerks.getInstance().getPerkManager().hasPerkEnabled(player, perk);
+                boolean hasPermissions = player.hasPermission("FancyPerks.perk." + perk.getSystemName());
 
                 inventory.setItem(topIndex, perk.getDisplayItem());
 
-                if(hasPerk) inventory.setItem(bottomIndex, getEnabledPerkItem(perk));
-                else inventory.setItem(bottomIndex, getDisabledPerkItem(perk));
+                if(FancyPerks.getInstance().isUsingVault() && !hasPermissions && perk.isBuyable()){
+                    inventory.setItem(bottomIndex, getBuyPerkItem(perk));
+                } else if(enabled){
+                    inventory.setItem(bottomIndex, getEnabledPerkItem(perk));
+                } else {
+                    inventory.setItem(bottomIndex, getDisabledPerkItem(perk));
+                }
             }
         }
 
@@ -116,6 +120,25 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
             ));
 
             itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "togglePerk");
+            itemMeta.getPersistentDataContainer().set(Perk.PERK_KEY, PersistentDataType.STRING, perk.getName());
+        });
+
+        return item;
+    }
+
+    public static ItemStack getBuyPerkItem(Perk perk){
+        ItemStack item = new ItemStack(Material.YELLOW_DYE);
+
+        item.editMeta(itemMeta -> {
+            itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<gradient:gold:yellow>You don't own this perk</gradient>"), TextDecoration.ITALIC));
+            itemMeta.lore(Arrays.asList(
+                    Component.empty(),
+                    MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<yellow>Price: $" + perk.getPrice() + "</yellow>"), TextDecoration.ITALIC),
+                    Component.empty(),
+                    MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<yellow>Click to buy</yellow>"), TextDecoration.ITALIC)
+            ));
+
+            itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "buyPerk");
             itemMeta.getPersistentDataContainer().set(Perk.PERK_KEY, PersistentDataType.STRING, perk.getName());
         });
 

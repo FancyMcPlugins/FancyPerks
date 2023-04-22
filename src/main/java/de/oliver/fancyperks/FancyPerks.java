@@ -7,11 +7,12 @@ import de.oliver.fancyperks.commands.FancyPerksCMD;
 import de.oliver.fancyperks.commands.PerksCMD;
 import de.oliver.fancyperks.gui.inventoryClick.ItemClickRegistry;
 import de.oliver.fancyperks.listeners.*;
-import net.minecraft.server.dedicated.DedicatedServer;
+import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
 import org.apache.maven.artifact.versioning.ComparableVersion;
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_19_R3.CraftServer;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class FancyPerks extends JavaPlugin {
@@ -20,12 +21,16 @@ public class FancyPerks extends JavaPlugin {
     private final PerkManager perkManager;
     private final VersionFetcher versionFetcher;
     private final FancyPerksConfig config;
+    private boolean usingVault;
+    private Economy vaultEconomy;
+    private Permission vaultPermission;
 
     public FancyPerks() {
         instance = this;
         perkManager = new PerkManager();
         versionFetcher = new VersionFetcher("https://api.modrinth.com/v2/project/fancyperks/version", "https://modrinth.com/plugin/fancyperks/versions");
         config = new FancyPerksConfig();
+        usingVault = false;
     }
 
     @Override
@@ -47,9 +52,8 @@ public class FancyPerks extends JavaPlugin {
         }).start();
 
         PluginManager pluginManager = Bukkit.getPluginManager();
-        DedicatedServer nmsServer = ((CraftServer) Bukkit.getServer()).getServer();
 
-        String serverSoftware = nmsServer.getServerModName();
+        String serverSoftware = Bukkit.getServer().getName();
         if(!serverSoftware.equals("Paper")){
             getLogger().warning("--------------------------------------------------");
             getLogger().warning("It is recommended to use Paper as server software.");
@@ -57,6 +61,28 @@ public class FancyPerks extends JavaPlugin {
             getLogger().warning("might not work correctly.");
             getLogger().warning("--------------------------------------------------");
         }
+
+        usingVault = pluginManager.getPlugin("Vault") != null;
+        if(usingVault){
+            RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServicesManager().getRegistration(Economy.class);
+            if (economyProvider != null) {
+                vaultEconomy = economyProvider.getProvider();
+                getLogger().info("Found vault economy");
+            } else {
+                usingVault = false;
+                getLogger().warning("Could not find any economy plugin");
+            }
+
+            RegisteredServiceProvider<Permission> permissionProvider = Bukkit.getServicesManager().getRegistration(Permission.class);
+            if (permissionProvider != null) {
+                vaultPermission = permissionProvider.getProvider();
+                getLogger().info("Found vault permission");
+            } else {
+                usingVault = false;
+                getLogger().warning("Could not find any permission plugin");
+            }
+        }
+
 
         Metrics metrics = new Metrics(instance, 18195);
 
@@ -93,6 +119,18 @@ public class FancyPerks extends JavaPlugin {
 
     public FancyPerksConfig getFanyPerksConfig() {
         return config;
+    }
+
+    public boolean isUsingVault() {
+        return usingVault;
+    }
+
+    public Economy getVaultEconomy() {
+        return vaultEconomy;
+    }
+
+    public Permission getVaultPermission() {
+        return vaultPermission;
     }
 
     public static FancyPerks getInstance() {

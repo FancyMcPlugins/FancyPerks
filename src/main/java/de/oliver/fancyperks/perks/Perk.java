@@ -24,6 +24,10 @@ public abstract class Perk {
     protected final String description;
     protected final ItemStack displayItem;
 
+    protected boolean enabled;
+    protected boolean buyable;
+    protected double price;
+
     public Perk(String name, String description, ItemStack displayItem) {
         this.name = name;
         this.systemName = name.replaceAll(" ", "_").toLowerCase();
@@ -31,7 +35,8 @@ public abstract class Perk {
         this.displayItem = displayItem;
 
         displayItem.editMeta(itemMeta -> {
-            itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<green>" + name + "</green>"), TextDecoration.ITALIC));
+            final String primaryColor = MessageHelper.getPrimaryColor();
+            itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<color:" + primaryColor + ">" + name + "</color>"), TextDecoration.ITALIC));
             itemMeta.lore(Arrays.asList(
                     MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<gray>" + description + "</gray>"), TextDecoration.ITALIC)
             ));
@@ -62,5 +67,29 @@ public abstract class Perk {
 
     public String getDescription() {
         return description;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isBuyable() {
+        return buyable;
+    }
+
+    public void setBuyable(boolean buyable) {
+        this.buyable = buyable;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

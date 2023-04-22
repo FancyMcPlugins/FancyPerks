@@ -1,5 +1,6 @@
 package de.oliver.fancyperks.gui.inventoryClick;
 
+import de.oliver.fancyperks.gui.inventoryClick.impl.BuyPerkInventoryItemClick;
 import de.oliver.fancyperks.gui.inventoryClick.impl.CancelInventoryItemClick;
 import de.oliver.fancyperks.gui.inventoryClick.impl.ChangePageInventoryItemClick;
 import de.oliver.fancyperks.gui.inventoryClick.impl.TogglePerkInventoryItemClick;
@@ -23,6 +24,7 @@ public class ItemClickRegistry {
     public static void register(){
         registerInventoryItemClick(ChangePageInventoryItemClick.INSTANCE);
         registerInventoryItemClick(TogglePerkInventoryItemClick.INSTANCE);
+        registerInventoryItemClick(BuyPerkInventoryItemClick.INSTANCE);
         registerInventoryItemClick(CancelInventoryItemClick.INSTANCE);
     }
 
