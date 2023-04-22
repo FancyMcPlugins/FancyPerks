@@ -16,7 +16,7 @@ java {
 
 repositories {
     mavenLocal()
-    maven { url = uri("https://jitpack.io") }
+    maven("https://jitpack.io")
 }
 
 dependencies {

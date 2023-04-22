@@ -71,6 +71,7 @@ public class FancyPerks extends JavaPlugin {
         pluginManager.registerEvents(new InventoryClickListener(), instance);
         pluginManager.registerEvents(new FoodLevelChangeListener(), instance);
         pluginManager.registerEvents(new EntityDamageListener(), instance);
+        pluginManager.registerEvents(new EntityDeathListener(), instance);
 
         ItemClickRegistry.register();
         perkManager.loadFromConfig();

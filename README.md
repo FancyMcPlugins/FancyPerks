@@ -28,6 +28,28 @@ You can download the latest versions at the following places:
 
 To use a perk - ``fancyperks.perk.(perk name)``<br>
 
+## Perks
+
+- Fast Digging
+- Night Vision
+- Water Breathing
+- Keep Exp
+- Fly
+- No Hunger
+- Keep Inventory
+- No Fire Damage
+- No Fall Damage
+- Double exp
+
+  Planned:
+- Telekinesis
+- Instant smelt
+- Strength
+- Double monster drops
+- Player glow
+- God (no damage)
+- Double attack damage
+
 ## Build from source
 1. Clone this repo and run `gradlew reobfJar`
 2. The jar file will be in `build/libs/FancyPerks-<version>.jar`
