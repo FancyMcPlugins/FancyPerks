@@ -23,13 +23,17 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT")
     implementation("com.github.FancyMcPlugins:FancyLib:main-SNAPSHOT")
-    implementation("net.kyori:adventure-text-minimessage:4.13.1")
-    implementation("com.github.MilkBowl:VaultAPI:1.7.1")
+    compileOnly("net.kyori:adventure-text-minimessage:4.13.1")
+    compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
 }
 
 tasks {
     runServer{
         minecraftVersion("1.19.4")
+    }
+
+    shadowJar{
+        archiveClassifier.set("")
     }
 
     publishing {
