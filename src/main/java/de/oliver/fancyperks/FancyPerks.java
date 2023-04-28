@@ -7,6 +7,8 @@ import de.oliver.fancyperks.commands.FancyPerksCMD;
 import de.oliver.fancyperks.commands.PerksCMD;
 import de.oliver.fancyperks.gui.inventoryClick.ItemClickRegistry;
 import de.oliver.fancyperks.listeners.*;
+import net.byteflux.libby.BukkitLibraryManager;
+import net.byteflux.libby.Library;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 import org.apache.maven.artifact.versioning.ComparableVersion;
@@ -27,6 +29,8 @@ public class FancyPerks extends JavaPlugin {
 
     public FancyPerks() {
         instance = this;
+        loadDependencies();
+
         perkManager = new PerkManager();
         versionFetcher = new VersionFetcher("https://api.modrinth.com/v2/project/fancyperks/version", "https://modrinth.com/plugin/fancyperks/versions");
         config = new FancyPerksConfig();
@@ -106,6 +110,20 @@ public class FancyPerks extends JavaPlugin {
     @Override
     public void onDisable() {
 
+    }
+
+    private void loadDependencies(){
+        getLogger().info("Loading FancyLib");
+        BukkitLibraryManager paperLibraryManager = new BukkitLibraryManager(instance);
+
+        Library fancyLib = Library.builder()
+                .groupId("com{}github{}FancyMcPlugins")
+                .artifactId("FancyLib")
+                .version("30294ec6ea")
+                .build();
+
+        paperLibraryManager.addJitPack();
+        paperLibraryManager.loadLibrary(fancyLib);
     }
 
     public PerkManager getPerkManager() {

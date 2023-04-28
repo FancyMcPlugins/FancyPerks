@@ -18,13 +18,17 @@ repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://jitpack.io")
+    maven("https://repo.alessiodp.com/releases/")
 }
 
 dependencies {
+
     compileOnly("io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT")
-    implementation("com.github.FancyMcPlugins:FancyLib:main-SNAPSHOT")
     compileOnly("net.kyori:adventure-text-minimessage:4.13.1")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
+
+    implementation("net.byteflux:libby-bukkit:1.2.0")
+    compileOnly("com.github.FancyMcPlugins:FancyLib:30294ec6ea")
 }
 
 tasks {
