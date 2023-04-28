@@ -30,19 +30,19 @@ public class PerkRegistry {
     public static final List<Perk> ALL_PERKS = new ArrayList<>();
 
     static {
-        ALL_PERKS.add(FAST_DIGGING);
-        ALL_PERKS.add(NIGHT_VISION);
-        ALL_PERKS.add(WATER_BREATHING);
-        ALL_PERKS.add(STRENGTH);
-        ALL_PERKS.add(KEEP_EXP);
-        ALL_PERKS.add(FLY);
-        ALL_PERKS.add(NO_HUNGER);
-        ALL_PERKS.add(KEEP_INVENTORY);
-        ALL_PERKS.add(NO_FIRE_DAMAGE);
-        ALL_PERKS.add(NO_FALL_DAMAGE);
-        ALL_PERKS.add(GOD);
-        ALL_PERKS.add(DOUBLE_EXP);
-        ALL_PERKS.add(DOUBLE_DROPS);
+        registerPerk(FAST_DIGGING);
+        registerPerk(NIGHT_VISION);
+        registerPerk(WATER_BREATHING);
+        registerPerk(STRENGTH);
+        registerPerk(KEEP_EXP);
+        registerPerk(FLY);
+        registerPerk(NO_HUNGER);
+        registerPerk(KEEP_INVENTORY);
+        registerPerk(NO_FIRE_DAMAGE);
+        registerPerk(NO_FALL_DAMAGE);
+        registerPerk(GOD);
+        registerPerk(DOUBLE_EXP);
+        registerPerk(DOUBLE_DROPS);
     }
 
     public static Perk getPerkByName(String name){
@@ -53,6 +53,10 @@ public class PerkRegistry {
         }
 
         return null;
+    }
+
+    public static void registerPerk(Perk perk){
+        ALL_PERKS.add(perk);
     }
 
 }
