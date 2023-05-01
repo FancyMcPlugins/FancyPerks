@@ -14,6 +14,7 @@ _Using [paper](https://papermc.io/downloads) is highly recommended_
 
 You can download the latest versions at the following places:
 
+- https://hangar.papermc.io/Oliver/FancyPerks
 - https://modrinth.com/plugin/fancyperks
 - https://github.com/FancyMcPlugins/FancyPerks/releases
 - https://www.spigotmc.org/resources/fancy-perks.109267/
