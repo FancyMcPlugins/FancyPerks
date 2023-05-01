@@ -1,4 +1,8 @@
-[![Generic badge](https://img.shields.io/badge/version-1.0.0-green.svg)](https://shields.io/)
+![Latest Version](https://img.shields.io/github/v/release/FancyMcPlugins/FancyPerks?style=flat-square)
+[![Discord](https://img.shields.io/discord/899740810956910683?color=7289da&logo=Discord&label=Discord&style=flat-square)](https://discord.gg/ZUgYCEJUEx)
+![GitHub Downloads](https://img.shields.io/github/downloads/FancyMcPlugins/FancyPerks/total?logo=GitHub&style=flat-square)
+[![SpigotMC Downloads](https://badges.spiget.org/resources/downloads/spigotmc-orange-109267.svg)](https://www.spigotmc.org/resources/fancy-perks.109267/)
+[![Downloads](https://img.shields.io/modrinth/dt/fancyperks?color=00AF5C&label=modrinth&style=flat&logo=modrinth)](https://modrinth.com/plugin/fancyperks/versions)
 
 # Fancy Perks
 A simple plugin that adds some fancy perks to your server.
@@ -10,9 +14,9 @@ _Using [paper](https://papermc.io/downloads) is highly recommended_
 
 You can download the latest versions at the following places:
 
-- TODO: spigotmc url
-- TODO: modrinth url
+- https://modrinth.com/plugin/fancyperks
 - https://github.com/FancyMcPlugins/FancyPerks/releases
+- https://www.spigotmc.org/resources/fancy-perks.109267/
 - Build from source
 
 ## Commands
