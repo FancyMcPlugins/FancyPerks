@@ -5,6 +5,7 @@ import de.oliver.fancyperks.FancyPerks;
 import de.oliver.fancyperks.PerkManager;
 import de.oliver.fancyperks.perks.Perk;
 import de.oliver.fancyperks.perks.impl.EffectPerk;
+import de.oliver.fancyperks.perks.impl.FlyPerk;
 import org.apache.maven.artifact.versioning.ComparableVersion;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -37,6 +38,8 @@ public class PlayerJoinListener implements Listener {
         for (Perk perk : perks) {
             if(perk instanceof EffectPerk effectPerk){
                 p.addPotionEffect(new PotionEffect(effectPerk.getEffectType(), -1, 0, true, false, false));
+            } else if(perk instanceof FlyPerk){
+                p.setAllowFlight(true);
             }
         }
 
