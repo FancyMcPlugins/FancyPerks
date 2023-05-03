@@ -3,6 +3,7 @@ package de.oliver.fancyperks;
 import de.oliver.fancylib.FancyLib;
 import de.oliver.fancylib.Metrics;
 import de.oliver.fancylib.VersionFetcher;
+import de.oliver.fancylib.serverSoftware.ServerSoftware;
 import de.oliver.fancyperks.commands.FancyPerksCMD;
 import de.oliver.fancyperks.commands.PerksCMD;
 import de.oliver.fancyperks.gui.inventoryClick.BuyPerkInventoryItemClick;
@@ -61,8 +62,7 @@ public class FancyPerks extends JavaPlugin {
 
         PluginManager pluginManager = Bukkit.getPluginManager();
 
-        String serverSoftware = Bukkit.getServer().getName();
-        if(!serverSoftware.equals("Paper")){
+        if(!ServerSoftware.isPaper()){
             getLogger().warning("--------------------------------------------------");
             getLogger().warning("It is recommended to use Paper as server software.");
             getLogger().warning("Because you are not using paper, the plugin");
@@ -150,7 +150,7 @@ public class FancyPerks extends JavaPlugin {
             Library fancyLib = Library.builder()
                     .groupId("com{}github{}FancyMcPlugins")
                     .artifactId("FancyLib")
-                    .version("25458c9930")
+                    .version("225ba14e03")
                     .build();
             paperLibraryManager.loadLibrary(fancyLib);
         }
