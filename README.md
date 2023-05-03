@@ -48,6 +48,8 @@ To use a perk - ``fancyperks.perk.(perk name)``<br>
 - Strength
 - Double mob drops
 - God (no damage)
+- 
+- Vanish
 
   Planned:
 - Telekinesis

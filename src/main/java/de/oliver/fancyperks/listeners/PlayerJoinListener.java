@@ -6,11 +6,14 @@ import de.oliver.fancyperks.PerkManager;
 import de.oliver.fancyperks.perks.Perk;
 import de.oliver.fancyperks.perks.impl.EffectPerk;
 import de.oliver.fancyperks.perks.impl.FlyPerk;
+import de.oliver.fancyperks.perks.impl.VanishPerk;
 import org.apache.maven.artifact.versioning.ComparableVersion;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.List;
@@ -32,6 +35,13 @@ public class PlayerJoinListener implements Listener {
             }).start();
         }
 
+        FancyPerks.getInstance().getServer().getOnlinePlayers().forEach(onlinePlayer -> {
+            byte isVanished = onlinePlayer.getPersistentDataContainer().getOrDefault(new NamespacedKey(FancyPerks.getInstance(), "vanish"), PersistentDataType.BYTE, (byte) 0);
+            if (isVanished == 1) {
+                p.hidePlayer(FancyPerks.getInstance(), onlinePlayer);
+            }
+        });
+
         PerkManager perkManager = FancyPerks.getInstance().getPerkManager();
         List<Perk> perks = perkManager.getEnabledPerks(event.getPlayer());
 
@@ -40,6 +50,8 @@ public class PlayerJoinListener implements Listener {
                 p.addPotionEffect(new PotionEffect(effectPerk.getEffectType(), -1, 0, true, false, false));
             } else if(perk instanceof FlyPerk){
                 p.setAllowFlight(true);
+            } else if (perk instanceof VanishPerk vanishPerk) {
+                vanishPerk.grant(p);
             }
         }
 

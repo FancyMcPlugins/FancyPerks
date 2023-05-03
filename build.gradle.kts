@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "de.oliver"
-version = "1.0.2-folia"
+version = "1.0.3-folia"
 description = "Perks plugin"
 
 java {

@@ -37,7 +37,7 @@ public class PerkManager {
         playerPerks.put(player.getUniqueId(), perks);
 
         YamlConfiguration config = YamlConfiguration.loadConfiguration(playersConfig);
-        config.set("perks." + player.getUniqueId().toString() + "." + perk.getSystemName(), true);
+        config.set("perks." + player.getUniqueId() + "." + perk.getSystemName(), true);
         try {
             config.save(playersConfig);
         } catch (IOException e) {
@@ -53,7 +53,7 @@ public class PerkManager {
         playerPerks.put(player.getUniqueId(), perks);
 
         YamlConfiguration config = YamlConfiguration.loadConfiguration(playersConfig);
-        config.set("perks." + player.getUniqueId().toString() + "." + perk.getSystemName(), false);
+        config.set("perks." + player.getUniqueId() + "." + perk.getSystemName(), false);
         try {
             config.save(playersConfig);
         } catch (IOException e) {

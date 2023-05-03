@@ -1,9 +1,6 @@
 package de.oliver.fancyperks.perks;
 
-import de.oliver.fancyperks.perks.impl.EffectPerk;
-import de.oliver.fancyperks.perks.impl.FlyPerk;
-import de.oliver.fancyperks.perks.impl.NoHungerPerk;
-import de.oliver.fancyperks.perks.impl.SimplePerk;
+import de.oliver.fancyperks.perks.impl.*;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
@@ -24,8 +21,10 @@ public class PerkRegistry {
     public static final Perk NO_FIRE_DAMAGE = new SimplePerk("No Fire Damage", "Don't get hurt by fire", new ItemStack(Material.FIRE_CHARGE));
     public static final Perk NO_FALL_DAMAGE = new SimplePerk("No Fall Damage", "Don't get hurt by fall damage", new ItemStack(Material.SLIME_BLOCK));
     public static final Perk GOD = new SimplePerk("God", "Don't get any damage", new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
+    public static final Perk MOBS_IGNORE = new SimplePerk("Mobs ignore", "Mobs don't notice you anymore", new ItemStack(Material.ZOMBIE_SPAWN_EGG));
     public static final Perk DOUBLE_EXP = new SimplePerk("Double Exp", "Receive double exp for killing monsters", new ItemStack(Material.EXPERIENCE_BOTTLE));
     public static final Perk DOUBLE_DROPS = new SimplePerk("Double Mob Drops", "Receive double drops for killing Mobs", new ItemStack(Material.ROTTEN_FLESH));
+    public static final Perk VANISH = new VanishPerk("Vanish", "Hide from all players", new ItemStack(Material.ENDER_PEARL));
 
     public static final List<Perk> ALL_PERKS = new ArrayList<>();
 
@@ -33,9 +32,11 @@ public class PerkRegistry {
         registerPerk(FAST_DIGGING);
         registerPerk(NIGHT_VISION);
         registerPerk(WATER_BREATHING);
+        registerPerk(MOBS_IGNORE);
         registerPerk(STRENGTH);
         registerPerk(KEEP_EXP);
         registerPerk(FLY);
+        registerPerk(VANISH);
         registerPerk(NO_HUNGER);
         registerPerk(KEEP_INVENTORY);
         registerPerk(NO_FIRE_DAMAGE);
