@@ -34,13 +34,14 @@ public class PlayerJoinListener implements Listener {
                 }
             }).start();
         }
-
-        FancyPerks.getInstance().getServer().getOnlinePlayers().forEach(onlinePlayer -> {
-            byte isVanished = onlinePlayer.getPersistentDataContainer().getOrDefault(new NamespacedKey(FancyPerks.getInstance(), "vanish"), PersistentDataType.BYTE, (byte) 0);
-            if (isVanished == 1) {
-                p.hidePlayer(FancyPerks.getInstance(), onlinePlayer);
-            }
-        });
+        if (!p.hasPermission("FancyPerks.seevanished")) {
+            FancyPerks.getInstance().getServer().getOnlinePlayers().forEach(onlinePlayer -> {
+                byte isVanished = onlinePlayer.getPersistentDataContainer().getOrDefault(new NamespacedKey(FancyPerks.getInstance(), "vanish"), PersistentDataType.BYTE, (byte) 0);
+                if (isVanished == 1) {
+                    p.hidePlayer(FancyPerks.getInstance(), onlinePlayer);
+                }
+            });
+        }
 
         PerkManager perkManager = FancyPerks.getInstance().getPerkManager();
         List<Perk> perks = perkManager.getEnabledPerks(event.getPlayer());

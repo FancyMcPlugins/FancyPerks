@@ -15,14 +15,18 @@ public class VanishPerk extends Perk {
     @Override
     public void grant(Player player) {
         super.grant(player);
+        FancyPerks.getInstance().getServer().getOnlinePlayers().forEach(otherPlayer -> {
+            if (!otherPlayer.hasPermission("FancyPerks.seevanished")) {
+                otherPlayer.hidePlayer(FancyPerks.getInstance(), player);
+            }
+        });
         player.getPersistentDataContainer().set(new NamespacedKey(FancyPerks.getInstance(), "vanish"), PersistentDataType.BYTE, (byte) 1);
-        FancyPerks.getInstance().getServer().getOnlinePlayers().forEach(otherPlayer -> otherPlayer.hidePlayer(FancyPerks.getInstance(), player));
     }
 
     @Override
     public void revoke(Player player) {
         super.revoke(player);
-        player.getPersistentDataContainer().set(new NamespacedKey(FancyPerks.getInstance(), "vanish"), PersistentDataType.BYTE, (byte) 0);
         FancyPerks.getInstance().getServer().getOnlinePlayers().forEach(otherPlayer -> otherPlayer.showPlayer(FancyPerks.getInstance(), player));
+        player.getPersistentDataContainer().set(new NamespacedKey(FancyPerks.getInstance(), "vanish"), PersistentDataType.BYTE, (byte) 0);
     }
 }
