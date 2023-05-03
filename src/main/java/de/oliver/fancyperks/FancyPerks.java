@@ -61,12 +61,14 @@ public class FancyPerks extends JavaPlugin {
         PluginManager pluginManager = Bukkit.getPluginManager();
 
         String serverSoftware = Bukkit.getServer().getName();
-        if(!serverSoftware.equals("Paper")){
+        if(!serverSoftware.equals("Folia")){
             getLogger().warning("--------------------------------------------------");
-            getLogger().warning("It is recommended to use Paper as server software.");
-            getLogger().warning("Because you are not using paper, the plugin");
-            getLogger().warning("might not work correctly.");
+            getLogger().warning("Unsupported server software used!");
+            getLogger().warning("This version of the plugin requires to use Folia");
+            getLogger().warning("(https://github.com/PaperMC/Folia)");
             getLogger().warning("--------------------------------------------------");
+            pluginManager.disablePlugin(this);
+            return;
         }
 
         usingVault = pluginManager.getPlugin("Vault") != null;

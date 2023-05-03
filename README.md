@@ -8,7 +8,7 @@
 A simple plugin that adds some fancy perks to your server.
 
 **Only supported for 1.19.4** _(might work in other version too tho)_<br>
-_Using [paper](https://papermc.io/downloads) is highly recommended_
+_Using [Folia](https://github.com/PaperMC/Folia) (a paper fork) is required_
 
 ## Get the plugin
 

@@ -3,10 +3,11 @@ plugins {
     id("xyz.jpenilla.run-paper") version "2.0.1" // Adds runServer and runMojangMappedServer tasks for testing
     id("maven-publish")
     id ("com.github.johnrengelman.shadow") version "8.1.1";
+    id("io.papermc.paperweight.userdev") version "1.5.4"
 }
 
 group = "de.oliver"
-version = "1.0.1"
+version = "1.0.1-folia"
 description = "Perks plugin"
 
 java {
@@ -22,7 +23,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT")
+    paperweight.foliaDevBundle("1.19.4-R0.1-SNAPSHOT")
     compileOnly("net.kyori:adventure-text-minimessage:4.13.1")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
 
@@ -31,10 +32,6 @@ dependencies {
 }
 
 tasks {
-    runServer{
-        minecraftVersion("1.19.4")
-    }
-
     shadowJar{
         archiveClassifier.set("")
     }
