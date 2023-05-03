@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "de.oliver"
-version = "1.0.3"
+version = "1.0.1"
 description = "Perks plugin"
 
 java {
