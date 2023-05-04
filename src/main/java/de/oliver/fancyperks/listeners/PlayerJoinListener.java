@@ -8,12 +8,10 @@ import de.oliver.fancyperks.perks.impl.EffectPerk;
 import de.oliver.fancyperks.perks.impl.FlyPerk;
 import de.oliver.fancyperks.perks.impl.VanishPerk;
 import org.apache.maven.artifact.versioning.ComparableVersion;
-import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.List;
@@ -36,8 +34,7 @@ public class PlayerJoinListener implements Listener {
         }
         if (!p.hasPermission("FancyPerks.seevanished")) {
             FancyPerks.getInstance().getServer().getOnlinePlayers().forEach(onlinePlayer -> {
-                byte isVanished = onlinePlayer.getPersistentDataContainer().getOrDefault(new NamespacedKey(FancyPerks.getInstance(), "vanish"), PersistentDataType.BYTE, (byte) 0);
-                if (isVanished == 1) {
+                if (onlinePlayer.getMetadata("vanished").get(0).asBoolean()) {
                     p.hidePlayer(FancyPerks.getInstance(), onlinePlayer);
                 }
             });

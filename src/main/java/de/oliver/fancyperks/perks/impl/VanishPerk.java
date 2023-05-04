@@ -2,10 +2,9 @@ package de.oliver.fancyperks.perks.impl;
 
 import de.oliver.fancyperks.FancyPerks;
 import de.oliver.fancyperks.perks.Perk;
-import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.metadata.FixedMetadataValue;
 
 public class VanishPerk extends Perk {
     public VanishPerk(String name, String description, ItemStack displayItem) {
@@ -20,13 +19,13 @@ public class VanishPerk extends Perk {
                 otherPlayer.hidePlayer(FancyPerks.getInstance(), player);
             }
         });
-        player.getPersistentDataContainer().set(new NamespacedKey(FancyPerks.getInstance(), "vanish"), PersistentDataType.BYTE, (byte) 1);
+        player.setMetadata("vanished", new FixedMetadataValue(FancyPerks.getInstance(), true));
     }
 
     @Override
     public void revoke(Player player) {
         super.revoke(player);
         FancyPerks.getInstance().getServer().getOnlinePlayers().forEach(otherPlayer -> otherPlayer.showPlayer(FancyPerks.getInstance(), player));
-        player.getPersistentDataContainer().set(new NamespacedKey(FancyPerks.getInstance(), "vanish"), PersistentDataType.BYTE, (byte) 0);
+        player.setMetadata("vanished", new FixedMetadataValue(FancyPerks.getInstance(), false));
     }
 }
