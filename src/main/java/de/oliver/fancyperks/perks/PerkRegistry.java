@@ -27,6 +27,7 @@ public class PerkRegistry {
     public static final Perk DOUBLE_DROPS = new SimplePerk("double_mob_drops", "Double Mob Drops", "Receive double drops for killing Mobs", new ItemStack(Material.ROTTEN_FLESH));
     public static final Perk VANISH = new VanishPerk("vanish", "Vanish", "Hide from all players", new ItemStack(Material.ENDER_PEARL));
     public static final Perk TELEKINESIS = new SimplePerk("telekinesis", "Telekinesis", "Automatically pick ups items", new ItemStack(Material.GOLDEN_PICKAXE));
+    public static final Perk INSTANT_SMELT = new SimplePerk("instant_smelt", "Instant smelt", "Automatically smelts ores", new ItemStack(Material.IRON_ORE));
 
     public static final List<Perk> ALL_PERKS = new ArrayList<>();
 
@@ -48,6 +49,7 @@ public class PerkRegistry {
         registerPerk(DOUBLE_EXP);
         registerPerk(DOUBLE_DROPS);
         registerPerk(TELEKINESIS);
+        registerPerk(INSTANT_SMELT);
     }
 
     public static Perk getPerkByName(String name){
