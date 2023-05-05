@@ -115,17 +115,26 @@ public class FancyPerks extends JavaPlugin {
     }
 
     private void loadDependencies(){
-        getLogger().info("Loading FancyLib");
         BukkitLibraryManager paperLibraryManager = new BukkitLibraryManager(instance);
-
-        Library fancyLib = Library.builder()
-                .groupId("com{}github{}FancyMcPlugins")
-                .artifactId("FancyLib")
-                .version("df4bc575eb")
-                .build();
-
         paperLibraryManager.addJitPack();
-        paperLibraryManager.loadLibrary(fancyLib);
+
+        boolean hasFancyLib;
+        try{
+            Class.forName("de.oliver.fancylib.FancyLib");
+            hasFancyLib = true;
+        } catch (ClassNotFoundException e){
+            hasFancyLib = false;
+        }
+
+        if(!hasFancyLib){
+            getLogger().info("Loading FancyLib");
+            Library fancyLib = Library.builder()
+                    .groupId("com{}github{}FancyMcPlugins")
+                    .artifactId("FancyLib")
+                    .version("429f6ab662")
+                    .build();
+            paperLibraryManager.loadLibrary(fancyLib);
+        }
     }
 
     public PerkManager getPerkManager() {
