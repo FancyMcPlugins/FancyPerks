@@ -103,7 +103,7 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
             ));
 
             itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "togglePerk");
-            itemMeta.getPersistentDataContainer().set(Perk.PERK_KEY, PersistentDataType.STRING, perk.getName());
+            itemMeta.getPersistentDataContainer().set(Perk.PERK_KEY, PersistentDataType.STRING, perk.getSystemName());
         });
 
         return item;
@@ -120,7 +120,7 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
             ));
 
             itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "togglePerk");
-            itemMeta.getPersistentDataContainer().set(Perk.PERK_KEY, PersistentDataType.STRING, perk.getName());
+            itemMeta.getPersistentDataContainer().set(Perk.PERK_KEY, PersistentDataType.STRING, perk.getSystemName());
         });
 
         return item;
@@ -139,7 +139,7 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
             ));
 
             itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "buyPerk");
-            itemMeta.getPersistentDataContainer().set(Perk.PERK_KEY, PersistentDataType.STRING, perk.getName());
+            itemMeta.getPersistentDataContainer().set(Perk.PERK_KEY, PersistentDataType.STRING, perk.getSystemName());
         });
 
         return item;

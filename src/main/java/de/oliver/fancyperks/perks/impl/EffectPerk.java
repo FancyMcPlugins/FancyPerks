@@ -10,8 +10,8 @@ public class EffectPerk extends Perk {
 
     private final PotionEffectType effectType;
 
-    public EffectPerk(String name, String description, ItemStack displayName, PotionEffectType effectType) {
-        super(name, description, displayName);
+    public EffectPerk(String systemName, String name, String description, ItemStack displayName, PotionEffectType effectType) {
+        super(systemName, name, description, displayName);
         this.effectType = effectType;
     }
 

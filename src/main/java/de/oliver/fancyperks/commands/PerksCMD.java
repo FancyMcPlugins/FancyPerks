@@ -71,7 +71,7 @@ public class PerksCMD implements CommandExecutor, TabCompleter {
                     if(p.hasPermission("FancyPerks.perk." + perk.getSystemName()) &&
                         !FancyPerks.getInstance().getPerkManager().hasPerkEnabled(p, perk)){
                         perk.grant(p);
-                        activatedPerks.add(perk.getName());
+                        activatedPerks.add(perk.getDisplayName());
                     }
                 }
 
@@ -97,7 +97,7 @@ public class PerksCMD implements CommandExecutor, TabCompleter {
             }
 
             perk.grant(p);
-            MessageHelper.success(p, "Activated the " + perk.getName() + " perk");
+            MessageHelper.success(p, "Activated the " + perk.getDisplayName() + " perk");
 
         } else if(args.length >= 2 && args[0].equalsIgnoreCase("deactivate")){
             String perkStr = args[1];
@@ -107,7 +107,7 @@ public class PerksCMD implements CommandExecutor, TabCompleter {
                 for (Perk perk : PerkRegistry.ALL_PERKS) {
                     if(FancyPerks.getInstance().getPerkManager().hasPerkEnabled(p, perk)){
                         perk.revoke(p);
-                        deactivatedPerks.add(perk.getName());
+                        deactivatedPerks.add(perk.getDisplayName());
                     }
                 }
 
@@ -128,7 +128,7 @@ public class PerksCMD implements CommandExecutor, TabCompleter {
             }
 
             perk.revoke(p);
-            MessageHelper.success(p, "Deactivated the " + perk.getName() + " perk");
+            MessageHelper.success(p, "Deactivated the " + perk.getDisplayName() + " perk");
         }
 
         return false;

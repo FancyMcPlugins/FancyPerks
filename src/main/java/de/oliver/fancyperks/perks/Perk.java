@@ -19,30 +19,22 @@ public abstract class Perk {
 
     protected static final PerkManager perkManager = FancyPerks.getInstance().getPerkManager();
 
-    protected final String name;
     protected final String systemName;
-    protected final String description;
+    protected String displayName;
+    protected String description;
     protected final ItemStack displayItem;
 
     protected boolean enabled;
     protected boolean buyable;
     protected double price;
 
-    public Perk(String name, String description, ItemStack displayItem) {
-        this.name = name;
-        this.systemName = name.replaceAll(" ", "_").toLowerCase();
+    public Perk(String systemName, String displayName, String description, ItemStack displayItem) {
+        this.systemName = systemName;
+        this.displayName = displayName;
         this.description = description;
         this.displayItem = displayItem;
-
-        displayItem.editMeta(itemMeta -> {
-            final String primaryColor = MessageHelper.getPrimaryColor();
-            itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<color:" + primaryColor + ">" + name + "</color>"), TextDecoration.ITALIC));
-            itemMeta.lore(Arrays.asList(
-                    MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<gray>" + description + "</gray>"), TextDecoration.ITALIC)
-            ));
-
-            itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "cancelClick");
-        });
+        this.enabled = true;
+        this.buyable = false;
     }
 
     public void grant(Player player){
@@ -54,19 +46,39 @@ public abstract class Perk {
     }
 
     public ItemStack getDisplayItem() {
-        return displayItem;
-    }
+        ItemStack item = displayItem.clone();
 
-    public String getName() {
-        return name;
+        item.editMeta(itemMeta -> {
+            final String primaryColor = MessageHelper.getPrimaryColor();
+            itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<color:" + primaryColor + ">" + displayName + "</color>"), TextDecoration.ITALIC));
+            itemMeta.lore(Arrays.asList(
+                    MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<gray>" + description + "</gray>"), TextDecoration.ITALIC)
+            ));
+
+            itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "cancelClick");
+        });
+
+        return item;
     }
 
     public String getSystemName() {
         return systemName;
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public boolean isEnabled() {

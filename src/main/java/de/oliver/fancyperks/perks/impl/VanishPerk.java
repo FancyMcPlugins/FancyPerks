@@ -7,8 +7,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 
 public class VanishPerk extends Perk {
-    public VanishPerk(String name, String description, ItemStack displayItem) {
-        super(name, description, displayItem);
+    public VanishPerk(String systemName, String name, String description, ItemStack displayItem) {
+        super(systemName, name, description, displayItem);
     }
 
     @Override

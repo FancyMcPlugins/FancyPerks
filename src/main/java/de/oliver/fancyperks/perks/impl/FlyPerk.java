@@ -6,8 +6,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class FlyPerk extends Perk {
-    public FlyPerk(String name, String description, ItemStack displayItem) {
-        super(name, description, displayItem);
+    public FlyPerk(String systemName, String name, String description, ItemStack displayItem) {
+        super(systemName, name, description, displayItem);
     }
 
     @Override

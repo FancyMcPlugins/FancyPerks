@@ -5,8 +5,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class NoHungerPerk extends Perk {
-    public NoHungerPerk(String name, String description, ItemStack displayItem) {
-        super(name, description, displayItem);
+    public NoHungerPerk(String systemName, String name, String description, ItemStack displayItem) {
+        super(systemName, name, description, displayItem);
     }
 
     @Override
