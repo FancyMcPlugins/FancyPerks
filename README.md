@@ -52,9 +52,7 @@ To use a perk - ``fancyperks.perk.(perk name)``<br>
 - Mobs ignore
 - Glowing
 - Telekinesis
-
-  Planned:
-- Instant smelt
+- Instant Smelt
 
 ## Build from source
 1. Clone this repo and run `gradlew reobfJar`
