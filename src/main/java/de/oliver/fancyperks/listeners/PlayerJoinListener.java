@@ -34,7 +34,7 @@ public class PlayerJoinListener implements Listener {
         }
         if (!p.hasPermission("FancyPerks.seevanished")) {
             FancyPerks.getInstance().getServer().getOnlinePlayers().forEach(onlinePlayer -> {
-                if (onlinePlayer.getMetadata("vanished").get(0).asBoolean()) {
+                if (!onlinePlayer.getMetadata("vanished").isEmpty() && onlinePlayer.getMetadata("vanished").get(0).asBoolean()) {
                     p.hidePlayer(FancyPerks.getInstance(), onlinePlayer);
                 }
             });
