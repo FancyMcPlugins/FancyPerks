@@ -50,11 +50,11 @@ To use a perk - ``fancyperks.perk.(perk name)``<br>
 - God (no damage)
 - Vanish
 - Mobs ignore
+- Glowing
+- Telekinesis
 
   Planned:
-- Telekinesis
 - Instant smelt
-- Player glow
 
 ## Build from source
 1. Clone this repo and run `gradlew reobfJar`

@@ -8,7 +8,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class EntityDeathListener implements Listener {
@@ -32,6 +34,18 @@ public class EntityDeathListener implements Listener {
         boolean hasDoubleDrops = perks.contains(PerkRegistry.DOUBLE_DROPS);
         if(hasDoubleDrops){
             event.getDrops().forEach(itemStack -> itemStack.setAmount(itemStack.getAmount() * 2));
+        }
+
+        boolean hasTelekinesis = perks.contains(PerkRegistry.TELEKINESIS);
+        if(hasTelekinesis){
+            for (ItemStack drop : event.getDrops()) {
+                HashMap<Integer, ItemStack> couldNotFit = p.getInventory().addItem(drop);
+                for (ItemStack item : couldNotFit.values()) {
+                    event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), item);
+                }
+            }
+
+            event.getDrops().clear();
         }
     }
 

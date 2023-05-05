@@ -13,6 +13,7 @@ public class PerkRegistry {
     public static final Perk FAST_DIGGING = new EffectPerk("fast_digging", "Fast Digging", "Gives you the haste effect", new ItemStack(Material.NETHERITE_PICKAXE), PotionEffectType.FAST_DIGGING);
     public static final Perk NIGHT_VISION = new EffectPerk("night_vision", "Night Vision", "Gives you the night vision effect", new ItemStack(Material.SPYGLASS), PotionEffectType.NIGHT_VISION);
     public static final Perk WATER_BREATHING = new EffectPerk("water_breathing", "Water Breathing", "Gives you the water breathing effect", new ItemStack(Material.WATER_BUCKET), PotionEffectType.WATER_BREATHING);
+    public static final Perk GLOWING = new EffectPerk("glowing", "Glowing", "Makes you glow", new ItemStack(Material.BEACON), PotionEffectType.GLOWING);
     public static final Perk STRENGTH = new EffectPerk("strength", "Strength", "Gives you the strength effect", new ItemStack(Material.DIAMOND_SWORD), PotionEffectType.INCREASE_DAMAGE);
     public static final Perk KEEP_EXP = new SimplePerk("keep_exp", "Keep EXP", "Don't lose your exp after dying", new ItemStack(Material.EXPERIENCE_BOTTLE));
     public static final Perk FLY = new FlyPerk("fly", "Fly", "Gives you the ability to fly", new ItemStack(Material.ELYTRA));
@@ -25,6 +26,7 @@ public class PerkRegistry {
     public static final Perk DOUBLE_EXP = new SimplePerk("double_exp", "Double Exp", "Receive double exp for killing monsters", new ItemStack(Material.EXPERIENCE_BOTTLE));
     public static final Perk DOUBLE_DROPS = new SimplePerk("double_mob_drops", "Double Mob Drops", "Receive double drops for killing Mobs", new ItemStack(Material.ROTTEN_FLESH));
     public static final Perk VANISH = new VanishPerk("vanish", "Vanish", "Hide from all players", new ItemStack(Material.ENDER_PEARL));
+    public static final Perk TELEKINESIS = new SimplePerk("telekinesis", "Telekinesis", "Automatically pick ups items", new ItemStack(Material.GOLDEN_PICKAXE));
 
     public static final List<Perk> ALL_PERKS = new ArrayList<>();
 
@@ -32,6 +34,7 @@ public class PerkRegistry {
         registerPerk(FAST_DIGGING);
         registerPerk(NIGHT_VISION);
         registerPerk(WATER_BREATHING);
+        registerPerk(GLOWING);
         registerPerk(STRENGTH);
         registerPerk(KEEP_EXP);
         registerPerk(KEEP_INVENTORY);
@@ -44,6 +47,7 @@ public class PerkRegistry {
         registerPerk(MOBS_IGNORE);
         registerPerk(DOUBLE_EXP);
         registerPerk(DOUBLE_DROPS);
+        registerPerk(TELEKINESIS);
     }
 
     public static Perk getPerkByName(String name){
