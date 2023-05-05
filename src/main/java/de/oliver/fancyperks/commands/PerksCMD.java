@@ -2,7 +2,7 @@ package de.oliver.fancyperks.commands;
 
 import de.oliver.fancylib.MessageHelper;
 import de.oliver.fancyperks.FancyPerks;
-import de.oliver.fancyperks.gui.customInventories.impl.PerksInventory;
+import de.oliver.fancyperks.gui.customInventories.PerksInventory;
 import de.oliver.fancyperks.perks.Perk;
 import de.oliver.fancyperks.perks.PerkRegistry;
 import org.bukkit.command.Command;

@@ -1,11 +1,13 @@
 package de.oliver.fancyperks;
 
+import de.oliver.fancylib.FancyLib;
 import de.oliver.fancylib.MessageHelper;
 import de.oliver.fancylib.Metrics;
 import de.oliver.fancylib.VersionFetcher;
 import de.oliver.fancyperks.commands.FancyPerksCMD;
 import de.oliver.fancyperks.commands.PerksCMD;
-import de.oliver.fancyperks.gui.inventoryClick.ItemClickRegistry;
+import de.oliver.fancyperks.gui.inventoryClick.BuyPerkInventoryItemClick;
+import de.oliver.fancyperks.gui.inventoryClick.TogglePerkInventoryItemClick;
 import de.oliver.fancyperks.listeners.*;
 import net.byteflux.libby.BukkitLibraryManager;
 import net.byteflux.libby.Library;
@@ -39,6 +41,7 @@ public class FancyPerks extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        FancyLib.setPlugin(this);
         MessageHelper.pluginName = getDescription().getName();
 
         new Thread(() -> {
@@ -98,14 +101,16 @@ public class FancyPerks extends JavaPlugin {
         pluginManager.registerEvents(new PlayerJoinListener(), instance);
         pluginManager.registerEvents(new EntityPotionEffectListener(), instance);
         pluginManager.registerEvents(new PlayerDeathListener(), instance);
-        pluginManager.registerEvents(new InventoryClickListener(), instance);
         pluginManager.registerEvents(new FoodLevelChangeListener(), instance);
         pluginManager.registerEvents(new EntityDamageListener(), instance);
         pluginManager.registerEvents(new EntityDeathListener(), instance);
         pluginManager.registerEvents(new EntityTargetLivingEntityListener(), instance);
         pluginManager.registerEvents(new BlockBreakListener(), instance);
 
-        ItemClickRegistry.register();
+
+        TogglePerkInventoryItemClick.INSTANCE.register();
+        BuyPerkInventoryItemClick.INSTANCE.register();
+
         perkManager.loadFromConfig();
     }
 
@@ -131,7 +136,7 @@ public class FancyPerks extends JavaPlugin {
             Library fancyLib = Library.builder()
                     .groupId("com{}github{}FancyMcPlugins")
                     .artifactId("FancyLib")
-                    .version("429f6ab662")
+                    .version("9436f1b0d9")
                     .build();
             paperLibraryManager.loadLibrary(fancyLib);
         }

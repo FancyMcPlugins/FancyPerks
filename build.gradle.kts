@@ -27,7 +27,7 @@ dependencies {
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
 
     implementation("net.byteflux:libby-bukkit:1.2.0")
-    compileOnly("com.github.FancyMcPlugins:FancyLib:429f6ab662")
+    compileOnly("com.github.FancyMcPlugins:FancyLib:9436f1b0d9")
 }
 
 tasks {

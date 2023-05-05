@@ -1,9 +1,9 @@
-package de.oliver.fancyperks.gui.inventoryClick.impl;
+package de.oliver.fancyperks.gui.inventoryClick;
 
 import de.oliver.fancylib.MessageHelper;
+import de.oliver.fancylib.gui.inventoryClick.InventoryItemClick;
 import de.oliver.fancyperks.FancyPerks;
-import de.oliver.fancyperks.gui.customInventories.impl.PerksInventory;
-import de.oliver.fancyperks.gui.inventoryClick.InventoryItemClick;
+import de.oliver.fancyperks.gui.customInventories.PerksInventory;
 import de.oliver.fancyperks.perks.Perk;
 import de.oliver.fancyperks.perks.PerkRegistry;
 import net.milkbowl.vault.economy.Economy;

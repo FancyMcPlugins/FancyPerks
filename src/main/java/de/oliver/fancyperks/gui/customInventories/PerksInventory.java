@@ -1,10 +1,10 @@
-package de.oliver.fancyperks.gui.customInventories.impl;
+package de.oliver.fancyperks.gui.customInventories;
 
 import de.oliver.fancylib.MessageHelper;
+import de.oliver.fancylib.gui.customInventories.CustomPlayerInventory;
+import de.oliver.fancylib.gui.customInventories.PageInventory;
+import de.oliver.fancylib.gui.inventoryClick.InventoryItemClick;
 import de.oliver.fancyperks.FancyPerks;
-import de.oliver.fancyperks.gui.customInventories.CustomPlayerInventory;
-import de.oliver.fancyperks.gui.customInventories.PageInventory;
-import de.oliver.fancyperks.gui.inventoryClick.InventoryItemClick;
 import de.oliver.fancyperks.perks.Perk;
 import de.oliver.fancyperks.perks.PerkRegistry;
 import net.kyori.adventure.text.Component;
