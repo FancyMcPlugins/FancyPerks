@@ -41,11 +41,6 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
         rowLoop:
         for (int row = 0; row < 4; row+=2) {
             for (int col = 0; col < 9; col++) {
-                if(perkIndex >= perks.size()){
-                    isLastPage = true;
-                    break rowLoop;
-                }
-
                 int topIndex = row*9+col;
                 int bottomIndex = topIndex+9;
 
@@ -64,6 +59,11 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
                 } else {
                     inventory.setItem(bottomIndex, getDisabledPerkItem(perk));
                 }
+
+                if(perkIndex >= perks.size()){
+                    isLastPage = true;
+                    break rowLoop;
+                }
             }
         }
 
@@ -76,7 +76,7 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
                 itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "changePage");
             });
 
-            inventory.setItem(46, previousPage);
+            inventory.setItem(47, previousPage);
         }
 
         if(!isLastPage) {
@@ -88,7 +88,7 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
                 itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "changePage");
             });
 
-            inventory.setItem(52, nextPage);
+            inventory.setItem(51, nextPage);
         }
     }
 
