@@ -11,6 +11,7 @@ import de.oliver.fancyperks.gui.inventoryClick.TogglePerkInventoryItemClick;
 import de.oliver.fancyperks.listeners.*;
 import net.byteflux.libby.BukkitLibraryManager;
 import net.byteflux.libby.Library;
+import net.luckperms.api.LuckPerms;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 import org.apache.maven.artifact.versioning.ComparableVersion;
@@ -28,6 +29,8 @@ public class FancyPerks extends JavaPlugin {
     private boolean usingVault;
     private Economy vaultEconomy;
     private Permission vaultPermission;
+    private boolean usingLuckPerms;
+    private LuckPerms luckPerms;
 
     public FancyPerks() {
         instance = this;
@@ -90,6 +93,16 @@ public class FancyPerks extends JavaPlugin {
             }
         }
 
+        usingLuckPerms = pluginManager.isPluginEnabled("LuckPerms");
+        if(usingLuckPerms){
+            RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
+            if (provider != null) {
+                luckPerms = provider.getProvider();
+            } else {
+                usingLuckPerms = false;
+            }
+        }
+
 
         Metrics metrics = new Metrics(instance, 18195);
 
@@ -106,6 +119,9 @@ public class FancyPerks extends JavaPlugin {
         pluginManager.registerEvents(new EntityDeathListener(), instance);
         pluginManager.registerEvents(new EntityTargetLivingEntityListener(), instance);
         pluginManager.registerEvents(new BlockBreakListener(), instance);
+        if(usingLuckPerms && config.isActivatePerkOnPermissionSet()){
+            new LuckPermsListener();
+        }
 
 
         TogglePerkInventoryItemClick.INSTANCE.register();
@@ -165,6 +181,14 @@ public class FancyPerks extends JavaPlugin {
 
     public Permission getVaultPermission() {
         return vaultPermission;
+    }
+
+    public boolean isUsingLuckPerms() {
+        return usingLuckPerms;
+    }
+
+    public LuckPerms getLuckPerms() {
+        return luckPerms;
     }
 
     public static FancyPerks getInstance() {

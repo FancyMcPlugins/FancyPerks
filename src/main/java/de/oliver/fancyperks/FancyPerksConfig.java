@@ -8,12 +8,14 @@ import org.bukkit.configuration.file.FileConfiguration;
 public class FancyPerksConfig {
 
     private boolean muteVersionNotification;
+    private boolean activatePerkOnPermissionSet;
 
     public void reload(){
         FancyPerks.getInstance().reloadConfig();
         FileConfiguration config = FancyPerks.getInstance().getConfig();
 
         muteVersionNotification = (boolean) ConfigHelper.getOrDefault(config, "mute_version_notification", false);
+        activatePerkOnPermissionSet = (boolean) ConfigHelper.getOrDefault(config, "activate_perk_on_permission_set", false);
 
         for (Perk perk : PerkRegistry.ALL_PERKS) {
             String displayName = (String) ConfigHelper.getOrDefault(config, "perks." + perk.getSystemName() + ".name", perk.getDisplayName());
@@ -39,4 +41,7 @@ public class FancyPerksConfig {
         return muteVersionNotification;
     }
 
+    public boolean isActivatePerkOnPermissionSet() {
+        return activatePerkOnPermissionSet;
+    }
 }
