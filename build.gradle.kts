@@ -28,7 +28,7 @@ dependencies {
     compileOnly("net.luckperms:api:5.4")
 
     implementation("net.byteflux:libby-bukkit:1.2.0")
-    compileOnly("com.github.FancyMcPlugins:FancyLib:9436f1b0d9")
+    compileOnly("com.github.FancyMcPlugins:FancyLib:25458c9930")
 }
 
 tasks {

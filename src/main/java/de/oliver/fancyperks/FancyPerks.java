@@ -1,7 +1,6 @@
 package de.oliver.fancyperks;
 
 import de.oliver.fancylib.FancyLib;
-import de.oliver.fancylib.MessageHelper;
 import de.oliver.fancylib.Metrics;
 import de.oliver.fancylib.VersionFetcher;
 import de.oliver.fancyperks.commands.FancyPerksCMD;
@@ -45,7 +44,6 @@ public class FancyPerks extends JavaPlugin {
     @Override
     public void onEnable() {
         FancyLib.setPlugin(this);
-        MessageHelper.pluginName = getDescription().getName();
 
         new Thread(() -> {
             ComparableVersion newestVersion = versionFetcher.getNewestVersion();
@@ -152,7 +150,7 @@ public class FancyPerks extends JavaPlugin {
             Library fancyLib = Library.builder()
                     .groupId("com{}github{}FancyMcPlugins")
                     .artifactId("FancyLib")
-                    .version("9436f1b0d9")
+                    .version("25458c9930")
                     .build();
             paperLibraryManager.loadLibrary(fancyLib);
         }
