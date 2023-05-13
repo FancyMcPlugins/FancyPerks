@@ -1,4 +1,5 @@
 ![Latest Version](https://img.shields.io/github/v/release/FancyMcPlugins/FancyPerks?style=flat-square)
+[![Generic badge](https://img.shields.io/badge/folia-supported-green.svg)](https://shields.io/)
 [![Discord](https://img.shields.io/discord/899740810956910683?color=7289da&logo=Discord&label=Discord&style=flat-square)](https://discord.gg/ZUgYCEJUEx)
 ![GitHub Downloads](https://img.shields.io/github/downloads/FancyMcPlugins/FancyPerks/total?logo=GitHub&style=flat-square)
 [![SpigotMC Downloads](https://badges.spiget.org/resources/downloads/spigotmc-orange-109267.svg)](https://www.spigotmc.org/resources/fancy-perks.109267/)
