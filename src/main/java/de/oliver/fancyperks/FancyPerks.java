@@ -4,13 +4,14 @@ import de.oliver.fancylib.FancyLib;
 import de.oliver.fancylib.Metrics;
 import de.oliver.fancylib.VersionFetcher;
 import de.oliver.fancylib.serverSoftware.ServerSoftware;
+import de.oliver.fancylib.serverSoftware.schedulers.BukkitScheduler;
+import de.oliver.fancylib.serverSoftware.schedulers.FancyScheduler;
 import de.oliver.fancyperks.commands.FancyPerksCMD;
 import de.oliver.fancyperks.commands.PerksCMD;
 import de.oliver.fancyperks.gui.inventoryClick.BuyPerkInventoryItemClick;
 import de.oliver.fancyperks.gui.inventoryClick.TogglePerkInventoryItemClick;
 import de.oliver.fancyperks.listeners.*;
-import net.byteflux.libby.BukkitLibraryManager;
-import net.byteflux.libby.Library;
+import de.oliver.fancyperks.utils.FoliaScheduler;
 import net.luckperms.api.LuckPerms;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
@@ -31,10 +32,14 @@ public class FancyPerks extends JavaPlugin {
     private Permission vaultPermission;
     private boolean usingLuckPerms;
     private LuckPerms luckPerms;
+    private final FancyScheduler scheduler;
 
     public FancyPerks() {
         instance = this;
-        loadDependencies();
+        //loadDependencies();
+        this.scheduler = ServerSoftware.isFolia()
+                ? new FoliaScheduler(instance)
+                : new BukkitScheduler(instance);
 
         perkManager = new PerkManager();
         versionFetcher = new VersionFetcher("https://api.modrinth.com/v2/project/fancyperks/version", "https://modrinth.com/plugin/fancyperks/versions");
@@ -46,7 +51,7 @@ public class FancyPerks extends JavaPlugin {
     public void onEnable() {
         FancyLib.setPlugin(this);
 
-        new Thread(() -> {
+        scheduler.runTaskAsynchronously(() -> {
             ComparableVersion newestVersion = versionFetcher.getNewestVersion();
             ComparableVersion currentVersion = new ComparableVersion(getDescription().getVersion());
             if(newestVersion == null){
@@ -58,7 +63,7 @@ public class FancyPerks extends JavaPlugin {
                 getLogger().warning(versionFetcher.getDownloadUrl());
                 getLogger().warning("-------------------------------------------------------");
             }
-        }).start();
+        });
 
         PluginManager pluginManager = Bukkit.getPluginManager();
 
@@ -133,28 +138,28 @@ public class FancyPerks extends JavaPlugin {
 
     }
 
-    private void loadDependencies(){
-        BukkitLibraryManager paperLibraryManager = new BukkitLibraryManager(instance);
-        paperLibraryManager.addJitPack();
-
-        boolean hasFancyLib;
-        try{
-            Class.forName("de.oliver.fancylib.FancyLib");
-            hasFancyLib = true;
-        } catch (ClassNotFoundException e){
-            hasFancyLib = false;
-        }
-
-        if(!hasFancyLib){
-            getLogger().info("Loading FancyLib");
-            Library fancyLib = Library.builder()
-                    .groupId("com{}github{}FancyMcPlugins")
-                    .artifactId("FancyLib")
-                    .version("225ba14e03")
-                    .build();
-            paperLibraryManager.loadLibrary(fancyLib);
-        }
-    }
+    //private void loadDependencies(){
+    //    BukkitLibraryManager paperLibraryManager = new BukkitLibraryManager(instance);
+    //    paperLibraryManager.addJitPack();
+//
+    //    boolean hasFancyLib;
+    //    try{
+    //        Class.forName("de.oliver.fancylib.FancyLib");
+    //        hasFancyLib = true;
+    //    } catch (ClassNotFoundException e){
+    //        hasFancyLib = false;
+    //    }
+//
+    //    if(!hasFancyLib){
+    //        getLogger().info("Loading FancyLib");
+    //        Library fancyLib = Library.builder()
+    //                .groupId("com{}github{}FancyMcPlugins")
+    //                .artifactId("FancyLib")
+    //                .version("225ba14e03")
+    //                .build();
+    //        paperLibraryManager.loadLibrary(fancyLib);
+    //    }
+    //}
 
     public PerkManager getPerkManager() {
         return perkManager;
@@ -183,6 +188,10 @@ public class FancyPerks extends JavaPlugin {
 
     public boolean isUsingLuckPerms() {
         return usingLuckPerms;
+    }
+
+    public FancyScheduler getScheduler() {
+        return scheduler;
     }
 
     public LuckPerms getLuckPerms() {

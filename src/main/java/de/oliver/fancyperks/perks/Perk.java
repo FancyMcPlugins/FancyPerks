@@ -22,6 +22,7 @@ public abstract class Perk {
     protected final String systemName;
     protected String displayName;
     protected String description;
+    protected String time;
     protected final ItemStack displayItem;
 
     protected boolean enabled;
@@ -35,6 +36,7 @@ public abstract class Perk {
         this.displayItem = displayItem;
         this.enabled = true;
         this.buyable = false;
+        this.time = "-1";
     }
 
     public void grant(Player player){
@@ -103,5 +105,13 @@ public abstract class Perk {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

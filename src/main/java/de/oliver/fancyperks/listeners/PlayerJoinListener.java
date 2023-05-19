@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.potion.PotionEffect;
 
 import java.util.List;
 
@@ -44,10 +43,17 @@ public class PlayerJoinListener implements Listener {
         List<Perk> perks = perkManager.getEnabledPerks(event.getPlayer());
 
         for (Perk perk : perks) {
+            if (!p.hasPermission("fancyperks.perk." + perk.getSystemName())) { // If server reloaded but perk dont disabled
+                MessageHelper.warning(p, "Perk " + perk.getDisplayName() + " turns off after 15 seconds");
+                FancyPerks.getInstance().getScheduler().runTaskLater(p.getLocation(), 15 * 20, () -> {
+                    perk.revoke(p);
+                    MessageHelper.success(p, "Automatically disabled the " + perk.getDisplayName() + " perk");
+                });
+            }
             if(perk instanceof EffectPerk effectPerk){
-                p.addPotionEffect(new PotionEffect(effectPerk.getEffectType(), -1, 0, true, false, false));
-            } else if(perk instanceof FlyPerk){
-                p.setAllowFlight(true);
+                effectPerk.grant(p);
+            } else if(perk instanceof FlyPerk flyPerk){
+                flyPerk.grant(p);
             } else if (perk instanceof VanishPerk vanishPerk) {
                 vanishPerk.grant(p);
             }

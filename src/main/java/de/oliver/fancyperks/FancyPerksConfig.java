@@ -21,6 +21,9 @@ public class FancyPerksConfig {
             String displayName = (String) ConfigHelper.getOrDefault(config, "perks." + perk.getSystemName() + ".name", perk.getDisplayName());
             perk.setDisplayName(displayName);
 
+            String time = (String) ConfigHelper.getOrDefault(config, "perks." + perk.getSystemName() + ".time", perk.getTime());
+            perk.setTime(time);
+
             String description = (String) ConfigHelper.getOrDefault(config, "perks." + perk.getSystemName() + ".description", perk.getDescription());
             perk.setDescription(description);
 

@@ -24,7 +24,9 @@ public class EffectPerk extends Perk {
     @Override
     public void revoke(Player player) {
         super.revoke(player);
-        player.removePotionEffect(effectType);
+        if (player.isOnline()) {
+            player.removePotionEffect(effectType);
+        }
     }
 
     public PotionEffectType getEffectType() {

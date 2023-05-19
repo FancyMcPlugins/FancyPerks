@@ -20,7 +20,9 @@ public class FlyPerk extends Perk {
     public void revoke(Player player) {
         super.revoke(player);
         if (player.getGameMode() == GameMode.CREATIVE) return;
-        player.setFlying(false);
-        player.setAllowFlight(false);
+        if (player.isOnline()) {
+            player.setFlying(false);
+            player.setAllowFlight(false);
+        }
     }
 }

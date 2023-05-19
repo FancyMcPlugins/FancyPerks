@@ -28,8 +28,8 @@ dependencies {
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
     compileOnly("net.luckperms:api:5.4")
 
-    implementation("net.byteflux:libby-bukkit:1.2.0")
-    compileOnly("com.github.FancyMcPlugins:FancyLib:225ba14e03")
+    //implementation("net.byteflux:libby-bukkit:1.2.0")
+    implementation("com.github.FancyMcPlugins:FancyLib:225ba14e03")
 }
 
 tasks {
