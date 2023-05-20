@@ -150,7 +150,7 @@ public class FancyPerks extends JavaPlugin {
             Library fancyLib = Library.builder()
                     .groupId("com{}github{}FancyMcPlugins")
                     .artifactId("FancyLib")
-                    .version("225ba14e03")
+                    .version("f2a7b13071")
                     .build();
             paperLibraryManager.loadLibrary(fancyLib);
         }
