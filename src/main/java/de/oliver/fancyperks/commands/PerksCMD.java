@@ -68,7 +68,7 @@ public class PerksCMD implements CommandExecutor, TabCompleter {
             if(perkStr.equals("*")){
                 List<String> activatedPerks = new ArrayList<>();
                 for (Perk perk : PerkRegistry.ALL_PERKS) {
-                    if(p.hasPermission("FancyPerks.perk." + perk.getSystemName()) &&
+                    if(perk.hasPermission(p) &&
                         !FancyPerks.getInstance().getPerkManager().hasPerkEnabled(p, perk)){
                         perk.grant(p);
                         activatedPerks.add(perk.getDisplayName());
@@ -91,7 +91,7 @@ public class PerksCMD implements CommandExecutor, TabCompleter {
                 return true;
             }
 
-            if(!p.hasPermission("FancyPerks.perk." + perk.getSystemName())){
+            if(!perk.hasPermission(p)){
                 MessageHelper.error(p, "You don't have permission to use this perk");
                 return false;
             }

@@ -51,7 +51,7 @@ public class TogglePerkInventoryItemClick implements InventoryItemClick {
                 perk.revoke(p);
                 event.setCurrentItem(PerksInventory.getDisabledPerkItem(perk));
             } else {
-                if(!p.hasPermission("FancyPerks.perk." + perk.getSystemName())){
+                if(!perk.hasPermission(player)){
                     MessageHelper.error(p, "You don't have permission to use this perk");
                     return;
                 }

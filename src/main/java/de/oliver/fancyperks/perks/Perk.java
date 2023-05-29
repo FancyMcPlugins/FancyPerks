@@ -37,6 +37,14 @@ public abstract class Perk {
         this.buyable = false;
     }
 
+    public boolean hasPermission(Player player){
+        if(player.hasPermission("fancyperks.perk.*")){
+            return true;
+        }
+
+        return player.hasPermission("fancyperks.perk." + systemName);
+    }
+
     public void grant(Player player){
         perkManager.enablePerk(player, this);
     }
