@@ -20,6 +20,7 @@ repositories {
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://jitpack.io")
     maven("https://repo.alessiodp.com/releases/")
+    maven("https://repo.fancyplugins.de/releases")
 }
 
 dependencies {
@@ -29,7 +30,7 @@ dependencies {
     compileOnly("net.luckperms:api:5.4")
 
     implementation("net.byteflux:libby-bukkit:1.2.0")
-    compileOnly("com.github.FancyMcPlugins:FancyLib:f2a7b13071")
+    compileOnly("de.oliver:FancyLib:1.0.1")
 }
 
 tasks {
@@ -42,6 +43,27 @@ tasks {
     }
 
     publishing {
+        repositories {
+            maven {
+                name = "fancypluginsReleases"
+                url = uri("https://repo.fancyplugins.de/releases")
+                credentials(PasswordCredentials::class)
+                authentication {
+                    isAllowInsecureProtocol = true
+                    create<BasicAuthentication>("basic")
+                }
+            }
+
+            maven {
+                name = "fancypluginsSnapshots"
+                url = uri("https://repo.fancyplugins.de/snapshots")
+                credentials(PasswordCredentials::class)
+                authentication {
+                    isAllowInsecureProtocol = true
+                    create<BasicAuthentication>("basic")
+                }
+            }
+        }
         publications {
             create<MavenPublication>("maven") {
                 groupId = project.group.toString()

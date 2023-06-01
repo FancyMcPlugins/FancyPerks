@@ -136,6 +136,7 @@ public class FancyPerks extends JavaPlugin {
     private void loadDependencies(){
         BukkitLibraryManager paperLibraryManager = new BukkitLibraryManager(instance);
         paperLibraryManager.addJitPack();
+        paperLibraryManager.addRepository("https://repo.fancyplugins.de/releases");
 
         boolean hasFancyLib;
         try{
@@ -148,9 +149,9 @@ public class FancyPerks extends JavaPlugin {
         if(!hasFancyLib){
             getLogger().info("Loading FancyLib");
             Library fancyLib = Library.builder()
-                    .groupId("com{}github{}FancyMcPlugins")
+                    .groupId("de{}oliver")
                     .artifactId("FancyLib")
-                    .version("f2a7b13071")
+                    .version("1.0.1")
                     .build();
             paperLibraryManager.loadLibrary(fancyLib);
         }
