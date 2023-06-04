@@ -54,6 +54,8 @@ To use a perk - ``fancyperks.perk.(perk name)``<br>
 - Glowing
 - Telekinesis
 - Instant Smelt
+- Auto repair
+- Auto planting
 
 ## Build from source
 1. Clone this repo and run `gradlew reobfJar`

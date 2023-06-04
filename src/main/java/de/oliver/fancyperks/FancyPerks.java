@@ -3,14 +3,15 @@ package de.oliver.fancyperks;
 import de.oliver.fancylib.FancyLib;
 import de.oliver.fancylib.Metrics;
 import de.oliver.fancylib.VersionFetcher;
+import de.oliver.fancylib.serverSoftware.FoliaScheduler;
 import de.oliver.fancylib.serverSoftware.ServerSoftware;
+import de.oliver.fancylib.serverSoftware.schedulers.BukkitScheduler;
+import de.oliver.fancylib.serverSoftware.schedulers.FancyScheduler;
 import de.oliver.fancyperks.commands.FancyPerksCMD;
 import de.oliver.fancyperks.commands.PerksCMD;
 import de.oliver.fancyperks.gui.inventoryClick.BuyPerkInventoryItemClick;
 import de.oliver.fancyperks.gui.inventoryClick.TogglePerkInventoryItemClick;
 import de.oliver.fancyperks.listeners.*;
-import net.byteflux.libby.BukkitLibraryManager;
-import net.byteflux.libby.Library;
 import net.luckperms.api.LuckPerms;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
@@ -25,6 +26,7 @@ public class FancyPerks extends JavaPlugin {
     private static FancyPerks instance;
     private final PerkManager perkManager;
     private final VersionFetcher versionFetcher;
+    private final FancyScheduler fancyScheduler;
     private final FancyPerksConfig config;
     private boolean usingVault;
     private Economy vaultEconomy;
@@ -34,10 +36,13 @@ public class FancyPerks extends JavaPlugin {
 
     public FancyPerks() {
         instance = this;
-        loadDependencies();
+//        loadDependencies();
 
         perkManager = new PerkManager();
         versionFetcher = new VersionFetcher("https://api.modrinth.com/v2/project/fancyperks/version", "https://modrinth.com/plugin/fancyperks/versions");
+        fancyScheduler = ServerSoftware.isFolia() ?
+                            new FoliaScheduler(instance) :
+                            new BukkitScheduler(instance);
         config = new FancyPerksConfig();
         usingVault = false;
     }
@@ -118,6 +123,7 @@ public class FancyPerks extends JavaPlugin {
         pluginManager.registerEvents(new EntityTargetLivingEntityListener(), instance);
         pluginManager.registerEvents(new BlockDropItemListener(), instance);
         pluginManager.registerEvents(new PlayerItemDamageListener(), instance);
+        pluginManager.registerEvents(new BlockBreakListener(), instance);
         if(usingLuckPerms && config.isActivatePerkOnPermissionSet()){
             new LuckPermsListener();
         }
@@ -129,35 +135,6 @@ public class FancyPerks extends JavaPlugin {
         perkManager.loadFromConfig();
     }
 
-    @Override
-    public void onDisable() {
-
-    }
-
-    private void loadDependencies(){
-        BukkitLibraryManager paperLibraryManager = new BukkitLibraryManager(instance);
-        paperLibraryManager.addJitPack();
-        paperLibraryManager.addRepository("https://repo.fancyplugins.de/releases");
-
-        boolean hasFancyLib;
-        try{
-            Class.forName("de.oliver.fancylib.FancyLib");
-            hasFancyLib = true;
-        } catch (ClassNotFoundException e){
-            hasFancyLib = false;
-        }
-
-        if(!hasFancyLib){
-            getLogger().info("Loading FancyLib");
-            Library fancyLib = Library.builder()
-                    .groupId("de{}oliver")
-                    .artifactId("FancyLib")
-                    .version("1.0.1")
-                    .build();
-            paperLibraryManager.loadLibrary(fancyLib);
-        }
-    }
-
     public PerkManager getPerkManager() {
         return perkManager;
     }
@@ -166,6 +143,9 @@ public class FancyPerks extends JavaPlugin {
         return versionFetcher;
     }
 
+    public FancyScheduler getFancyScheduler() {
+        return fancyScheduler;
+    }
 
     public FancyPerksConfig getFanyPerksConfig() {
         return config;

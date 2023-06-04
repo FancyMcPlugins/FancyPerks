@@ -25,12 +25,12 @@ repositories {
 
 dependencies {
     paperweight.paperDevBundle("1.19.4-R0.1-SNAPSHOT")
+
+    implementation("de.oliver:FancyLib:1.0.2")
+
     compileOnly("net.kyori:adventure-text-minimessage:4.13.1")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
     compileOnly("net.luckperms:api:5.4")
-
-    implementation("net.byteflux:libby-bukkit:1.2.0")
-    compileOnly("de.oliver:FancyLib:1.0.2")
 }
 
 tasks {

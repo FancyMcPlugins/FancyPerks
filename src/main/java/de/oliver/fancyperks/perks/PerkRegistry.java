@@ -29,6 +29,7 @@ public class PerkRegistry {
     public static final Perk TELEKINESIS = new SimplePerk("telekinesis", "Telekinesis", "Automatically pick ups items", new ItemStack(Material.GOLDEN_PICKAXE));
     public static final Perk INSTANT_SMELT = new SimplePerk("instant_smelt", "Instant smelt", "Automatically smelts ores", new ItemStack(Material.IRON_ORE));
     public static final Perk AUTO_REPAIR = new AutoRepairPerk("auto_repair", "Auto repair", "Your tools and armor won't lose durability", new ItemStack(Material.ANVIL));
+    public static final Perk AUTO_PLANTING = new AutoRepairPerk("auto_planting", "Auto planting", "Automatically replants crops when harvested", new ItemStack(Material.WHEAT_SEEDS));
 
     public static final List<Perk> ALL_PERKS = new ArrayList<>();
 
@@ -52,6 +53,7 @@ public class PerkRegistry {
         registerPerk(TELEKINESIS);
         registerPerk(INSTANT_SMELT);
         registerPerk(AUTO_REPAIR);
+        registerPerk(AUTO_PLANTING);
     }
 
     public static Perk getPerkByName(String name){
