@@ -28,6 +28,7 @@ public class PerkRegistry {
     public static final Perk VANISH = new VanishPerk("vanish", "Vanish", "Hide from all players", new ItemStack(Material.ENDER_PEARL));
     public static final Perk TELEKINESIS = new SimplePerk("telekinesis", "Telekinesis", "Automatically pick ups items", new ItemStack(Material.GOLDEN_PICKAXE));
     public static final Perk INSTANT_SMELT = new SimplePerk("instant_smelt", "Instant smelt", "Automatically smelts ores", new ItemStack(Material.IRON_ORE));
+    public static final Perk AUTO_REPAIR = new AutoRepairPerk("auto_repair", "Auto repair", "Your tools and armor won't lose durability", new ItemStack(Material.ANVIL));
 
     public static final List<Perk> ALL_PERKS = new ArrayList<>();
 
@@ -50,6 +51,7 @@ public class PerkRegistry {
         registerPerk(DOUBLE_DROPS);
         registerPerk(TELEKINESIS);
         registerPerk(INSTANT_SMELT);
+        registerPerk(AUTO_REPAIR);
     }
 
     public static Perk getPerkByName(String name){
