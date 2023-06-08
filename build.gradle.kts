@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "de.oliver"
-version = "1.0.2"
+version = "1.1.0"
 description = "Perks plugin"
 
 java {
@@ -34,7 +34,7 @@ dependencies {
 
 tasks {
     runServer{
-        minecraftVersion("1.19.4")
+        minecraftVersion("1.20")
     }
 
     shadowJar{

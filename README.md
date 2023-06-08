@@ -8,7 +8,7 @@
 # Fancy Perks
 A simple plugin that adds some fancy perks to your server.
 
-**Only supported for 1.19.4** _(might work in other version too tho)_<br>
+**Only supported for 1.20** _(might work in other version too tho)_<br>
 _Using [paper](https://papermc.io/downloads) is highly recommended_
 
 ## Get the plugin
