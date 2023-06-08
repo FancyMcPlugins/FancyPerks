@@ -3,7 +3,6 @@ plugins {
     id("xyz.jpenilla.run-paper") version "2.0.1" // Adds runServer and runMojangMappedServer tasks for testing
     id("maven-publish")
     id ("com.github.johnrengelman.shadow") version "8.1.1";
-    id("io.papermc.paperweight.userdev") version "1.5.4"
 }
 
 group = "de.oliver"
@@ -24,7 +23,7 @@ repositories {
 }
 
 dependencies {
-    paperweight.paperDevBundle("1.19.4-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.20-R0.1-SNAPSHOT")
 
     implementation("de.oliver:FancyLib:1.0.2")
 
