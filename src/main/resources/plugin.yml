@@ -1,7 +1,7 @@
 name: FancyPerks
 main: de.oliver.fancyperks.FancyPerks
 author: OliverHD
-version: 1.0.2
+version: 1.1.0
 api-version: 1.19
 folia-supported: true
 loadbefore:
