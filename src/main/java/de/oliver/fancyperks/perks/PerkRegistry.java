@@ -13,6 +13,7 @@ public class PerkRegistry {
     public static final Perk FAST_DIGGING = new EffectPerk("fast_digging", "Fast Digging", "Gives you the haste effect", new ItemStack(Material.NETHERITE_PICKAXE), PotionEffectType.FAST_DIGGING);
     public static final Perk NIGHT_VISION = new EffectPerk("night_vision", "Night Vision", "Gives you the night vision effect", new ItemStack(Material.SPYGLASS), PotionEffectType.NIGHT_VISION);
     public static final Perk WATER_BREATHING = new EffectPerk("water_breathing", "Water Breathing", "Gives you the water breathing effect", new ItemStack(Material.WATER_BUCKET), PotionEffectType.WATER_BREATHING);
+    public static final Perk SPEED = new EffectPerk("speed", "Speed", "Gives you the speed effect", new ItemStack(Material.FEATHER), PotionEffectType.SPEED);
     public static final Perk GLOWING = new EffectPerk("glowing", "Glowing", "Makes you glow", new ItemStack(Material.BEACON), PotionEffectType.GLOWING);
     public static final Perk STRENGTH = new EffectPerk("strength", "Strength", "Gives you the strength effect", new ItemStack(Material.DIAMOND_SWORD), PotionEffectType.INCREASE_DAMAGE);
     public static final Perk KEEP_EXP = new SimplePerk("keep_exp", "Keep EXP", "Don't lose your exp after dying", new ItemStack(Material.EXPERIENCE_BOTTLE));
@@ -37,6 +38,7 @@ public class PerkRegistry {
         registerPerk(FAST_DIGGING);
         registerPerk(NIGHT_VISION);
         registerPerk(WATER_BREATHING);
+        registerPerk(SPEED);
         registerPerk(GLOWING);
         registerPerk(STRENGTH);
         registerPerk(KEEP_EXP);
