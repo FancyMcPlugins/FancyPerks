@@ -39,6 +39,7 @@ To use a perk - ``fancyperks.perk.(perk name)``<br>
 - Fast Digging
 - Night Vision
 - Water Breathing
+- Speed
 - Keep Exp
 - Fly
 - No Hunger
