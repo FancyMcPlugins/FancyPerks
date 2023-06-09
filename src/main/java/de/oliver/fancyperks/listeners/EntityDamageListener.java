@@ -29,7 +29,7 @@ public class EntityDamageListener implements Listener {
         }
 
         boolean hasNoFireDamage = perks.contains(PerkRegistry.NO_FIRE_DAMAGE);
-        if(hasNoFireDamage && event.getCause().name().toLowerCase().contains("fire")){
+        if(hasNoFireDamage && (event.getCause().name().toLowerCase().contains("fire") || event.getCause() == EntityDamageEvent.DamageCause.LAVA)){
             event.setDamage(0);
         }
 
