@@ -6,8 +6,9 @@ plugins {
 }
 
 group = "de.oliver"
+description = "Simple plugin that adds perks to your server"
 version = "1.1.0"
-description = "Perks plugin"
+val mcVersion = "1.20.1"
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
@@ -23,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.20-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:$mcVersion-R0.1-SNAPSHOT")
 
     implementation("de.oliver:FancyLib:1.0.2")
 
@@ -34,7 +35,7 @@ dependencies {
 
 tasks {
     runServer{
-        minecraftVersion("1.20")
+        minecraftVersion(mcVersion)
     }
 
     shadowJar{
@@ -85,5 +86,13 @@ tasks {
     }
     processResources {
         filteringCharset = Charsets.UTF_8.name() // We want UTF-8 for everything
+        val props = mapOf(
+            "version" to project.version,
+            "description" to project.description,
+        )
+        inputs.properties(props)
+        filesMatching("plugin.yml") {
+            expand(props)
+        }
     }
 }
