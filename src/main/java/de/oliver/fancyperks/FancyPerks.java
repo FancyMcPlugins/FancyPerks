@@ -12,14 +12,20 @@ import de.oliver.fancyperks.commands.PerksCMD;
 import de.oliver.fancyperks.gui.inventoryClick.BuyPerkInventoryItemClick;
 import de.oliver.fancyperks.gui.inventoryClick.TogglePerkInventoryItemClick;
 import de.oliver.fancyperks.listeners.*;
+import de.oliver.fancyperks.perks.Perk;
+import de.oliver.fancyperks.perks.PerkRegistry;
+import de.oliver.fancyperks.perks.impl.LavaRunnerPerk;
 import net.luckperms.api.LuckPerms;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 import org.apache.maven.artifact.versioning.ComparableVersion;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.List;
 
 public class FancyPerks extends JavaPlugin {
 
@@ -124,6 +130,7 @@ public class FancyPerks extends JavaPlugin {
         pluginManager.registerEvents(new BlockDropItemListener(), instance);
         pluginManager.registerEvents(new PlayerItemDamageListener(), instance);
         pluginManager.registerEvents(new BlockBreakListener(), instance);
+        pluginManager.registerEvents(new PlayerMoveListener(), instance);
         if(usingLuckPerms && config.isActivatePerkOnPermissionSet()){
             new LuckPermsListener();
         }
@@ -133,6 +140,18 @@ public class FancyPerks extends JavaPlugin {
         BuyPerkInventoryItemClick.INSTANCE.register();
 
         perkManager.loadFromConfig();
+
+        if(PerkRegistry.LAVA_RUNNER.isEnabled()) {
+            LavaRunnerPerk lavaRunner = (LavaRunnerPerk) PerkRegistry.LAVA_RUNNER;
+            fancyScheduler.runTaskTimerAsynchronously(10, 10, () -> {
+                for (Player player : lavaRunner.getPlayerBlockCache().keySet()) {
+                    List<Perk> perks = perkManager.getEnabledPerks(player);
+                    if (perks.contains(PerkRegistry.LAVA_RUNNER)) {
+                        (lavaRunner).updateBlocks(player);
+                    }
+                }
+            });
+        }
     }
 
     public PerkManager getPerkManager() {

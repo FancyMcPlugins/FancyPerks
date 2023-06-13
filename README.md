@@ -57,6 +57,7 @@ To use a perk - ``fancyperks.perk.(perk name)``<br>
 - Instant Smelt
 - Auto repair
 - Auto planting
+- Lava runner
 
 ## Build from source
 1. Clone this repo and run `gradlew reobfJar`
