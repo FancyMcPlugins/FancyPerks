@@ -11,9 +11,9 @@ import org.bukkit.metadata.FixedMetadataValue;
 import java.util.*;
 
 public class LavaRunnerPerk extends SimplePerk{
-    public static final int RADIUS = 4;
     public static final Material BLOCK_TYPE = Material.OBSIDIAN;
 
+    private int radius;
     private final Map<Player, PlayerBlockCache> playerBlockCache;
     public LavaRunnerPerk(String systemName, String name, String description, ItemStack displayItem) {
         super(systemName, name, description, displayItem);
@@ -34,11 +34,11 @@ public class LavaRunnerPerk extends SimplePerk{
 
         // check what blocks should be kept
         if(player.isOnline()) {
-            for (int dx = -RADIUS; dx < RADIUS; dx++) {
-                for (int dz = -RADIUS; dz < RADIUS; dz++) {
-                    for (int dy = 1; dy <= 2; dy++) {
+            for (int dx = -radius; dx < radius; dx++) {
+                for (int dz = -radius; dz < radius; dz++) {
+                    for (int dy = 1; dy <= 3; dy++) {
                         double distance = Math.sqrt(dx * dx + dz * dz);
-                        if (distance > RADIUS) {
+                        if (distance > radius) {
                             continue;
                         }
 
@@ -93,6 +93,14 @@ public class LavaRunnerPerk extends SimplePerk{
                 }
             });
         }
+    }
+
+    public int getRadius() {
+        return radius;
+    }
+
+    public void setRadius(int radius) {
+        this.radius = radius;
     }
 
     public PlayerBlockCache getCache(Player player){

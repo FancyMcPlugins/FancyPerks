@@ -3,6 +3,7 @@ package de.oliver.fancyperks;
 import de.oliver.fancylib.ConfigHelper;
 import de.oliver.fancyperks.perks.Perk;
 import de.oliver.fancyperks.perks.PerkRegistry;
+import de.oliver.fancyperks.perks.impl.LavaRunnerPerk;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class FancyPerksConfig {
@@ -32,6 +33,11 @@ public class FancyPerksConfig {
 
             double price = (double) ConfigHelper.getOrDefault(config, "perks." + perk.getSystemName() + ".price", 1000d);
             perk.setPrice(price);
+
+            if(perk instanceof LavaRunnerPerk lavaRunnerPerk){
+                int radius = (int) ConfigHelper.getOrDefault(config, "perks." + perk.getSystemName() + ".radius", 4);
+                lavaRunnerPerk.setRadius(radius);
+            }
         }
 
         FancyPerks.getInstance().saveConfig();
