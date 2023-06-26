@@ -20,10 +20,9 @@ public abstract class Perk {
     protected static final PerkManager perkManager = FancyPerks.getInstance().getPerkManager();
 
     protected final String systemName;
+    protected final ItemStack displayItem;
     protected String displayName;
     protected String description;
-    protected final ItemStack displayItem;
-
     protected boolean enabled;
     protected boolean buyable;
     protected double price;
@@ -37,19 +36,19 @@ public abstract class Perk {
         this.buyable = false;
     }
 
-    public boolean hasPermission(Player player){
-        if(player.hasPermission("fancyperks.perk.*")){
+    public boolean hasPermission(Player player) {
+        if (player.hasPermission("fancyperks.perk.*")) {
             return true;
         }
 
         return player.hasPermission("fancyperks.perk." + systemName);
     }
 
-    public void grant(Player player){
+    public void grant(Player player) {
         perkManager.enablePerk(player, this);
     }
 
-    public void revoke(Player player){
+    public void revoke(Player player) {
         perkManager.disablePerk(player, this);
     }
 

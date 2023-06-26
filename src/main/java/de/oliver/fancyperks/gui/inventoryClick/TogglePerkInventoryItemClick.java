@@ -23,7 +23,8 @@ public class TogglePerkInventoryItemClick implements InventoryItemClick {
             Perk.PERK_KEY
     );
 
-    private TogglePerkInventoryItemClick(){ }
+    private TogglePerkInventoryItemClick() {
+    }
 
     @Override
     public String getId() {
@@ -35,23 +36,23 @@ public class TogglePerkInventoryItemClick implements InventoryItemClick {
         Player p = (Player) event.getWhoClicked();
         ItemStack item = event.getCurrentItem();
 
-        if(item != null && InventoryItemClick.hasKeys(item, REQUIRED_KEYS)){
+        if (item != null && InventoryItemClick.hasKeys(item, REQUIRED_KEYS)) {
             event.setCancelled(true);
 
             String perkName = item.getItemMeta().getPersistentDataContainer().get(Perk.PERK_KEY, PersistentDataType.STRING);
             Perk perk = PerkRegistry.getPerkByName(perkName);
 
-            if(perk == null){
+            if (perk == null) {
                 return;
             }
 
             boolean hasPerk = FancyPerks.getInstance().getPerkManager().hasPerkEnabled(p, perk);
 
-            if(hasPerk){
+            if (hasPerk) {
                 perk.revoke(p);
                 event.setCurrentItem(PerksInventory.getDisabledPerkItem(perk));
             } else {
-                if(!perk.hasPermission(player)){
+                if (!perk.hasPermission(player)) {
                     MessageHelper.error(p, "You don't have permission to use this perk");
                     return;
                 }

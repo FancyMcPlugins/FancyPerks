@@ -12,12 +12,12 @@ import org.bukkit.entity.Player;
 
 public class LuckPermsListener {
 
-    public LuckPermsListener(){
+    public LuckPermsListener() {
         EventBus eventBus = FancyPerks.getInstance().getLuckPerms().getEventBus();
         eventBus.subscribe(FancyPerks.getInstance(), NodeAddEvent.class, this::onNodeAdd);
     }
 
-    private void onNodeAdd(NodeAddEvent event){
+    private void onNodeAdd(NodeAddEvent event) {
         String permission = event.getNode().getKey().toLowerCase();
         if (!permission.startsWith("fancyperks.perk.")) {
             return;
@@ -25,21 +25,21 @@ public class LuckPermsListener {
 
         String perkStr = permission.substring(permission.lastIndexOf('.') + 1, permission.length());
         Perk perk = PerkRegistry.getPerkByName(perkStr);
-        if(perk == null){
+        if (perk == null) {
             return;
         }
 
-        if(event.isUser()){
+        if (event.isUser()) {
             User user = (User) event.getTarget();
             Player p = Bukkit.getPlayer(user.getUniqueId());
-            if(p == null){
+            if (p == null) {
                 return;
             }
 
-            if(event.getNode().getValue() && perk.hasPermission(p)){
+            if (event.getNode().getValue() && perk.hasPermission(p)) {
                 perk.grant(p);
                 MessageHelper.success(p, "Automatically enabled the " + perk.getDisplayName() + " perk");
-            } else if(!perk.hasPermission(p)) {
+            } else if (!perk.hasPermission(p)) {
                 perk.revoke(p);
                 MessageHelper.success(p, "Automatically disabled the " + perk.getDisplayName() + " perk");
             }

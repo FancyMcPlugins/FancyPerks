@@ -26,7 +26,8 @@ public class BuyPerkInventoryItemClick implements InventoryItemClick {
             Perk.PERK_KEY
     );
 
-    private BuyPerkInventoryItemClick(){ }
+    private BuyPerkInventoryItemClick() {
+    }
 
     @Override
     public String getId() {
@@ -38,12 +39,12 @@ public class BuyPerkInventoryItemClick implements InventoryItemClick {
         Player p = (Player) event.getWhoClicked();
         ItemStack item = event.getCurrentItem();
 
-        if(item != null && InventoryItemClick.hasKeys(item, REQUIRED_KEYS)){
+        if (item != null && InventoryItemClick.hasKeys(item, REQUIRED_KEYS)) {
             event.setCancelled(true);
             String perkName = item.getItemMeta().getPersistentDataContainer().get(Perk.PERK_KEY, PersistentDataType.STRING);
             Perk perk = PerkRegistry.getPerkByName(perkName);
 
-            if(perk == null || !perk.isBuyable() || !FancyPerks.getInstance().isUsingVault()){
+            if (perk == null || !perk.isBuyable() || !FancyPerks.getInstance().isUsingVault()) {
                 return;
             }
 
@@ -61,7 +62,7 @@ public class BuyPerkInventoryItemClick implements InventoryItemClick {
                 return;
             }
 
-            if(!permission.playerAdd(null, player, "fancyperks.perk." + perk.getSystemName())){
+            if (!permission.playerAdd(null, player, "fancyperks.perk." + perk.getSystemName())) {
                 MessageHelper.warning(player, "Could not give you the perk");
                 return;
             }

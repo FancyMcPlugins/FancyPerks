@@ -14,8 +14,8 @@ import java.util.List;
 public class FoodLevelChangeListener implements Listener {
 
     @EventHandler
-    public void onFoodLevelChange(FoodLevelChangeEvent event){
-        if(!(event.getEntity() instanceof Player p)){
+    public void onFoodLevelChange(FoodLevelChangeEvent event) {
+        if (!(event.getEntity() instanceof Player p)) {
             return;
         }
 
@@ -24,7 +24,7 @@ public class FoodLevelChangeListener implements Listener {
 
         int i = perks.indexOf(PerkRegistry.NO_HUNGER);
 
-        if(i == -1){
+        if (i == -1) {
             return;
         }
 

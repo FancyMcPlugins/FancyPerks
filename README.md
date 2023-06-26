@@ -6,6 +6,7 @@
 [![Downloads](https://img.shields.io/modrinth/dt/fancyperks?color=00AF5C&label=modrinth&style=flat&logo=modrinth)](https://modrinth.com/plugin/fancyperks/versions)
 
 # Fancy Perks
+
 A simple plugin that adds some fancy perks to your server.
 
 **Only supported for 1.20** _(might work in other version too tho)_<br>
@@ -28,7 +29,6 @@ You can download the latest versions at the following places:
 /perks deactivate (perk | *) - _Deactivates the perk_<br>
 /fancyperks version - _Shows the current version_<br>
 /fancyperks reload - _Reloads the config_<br>
-
 
 ## Permissions
 
@@ -60,5 +60,6 @@ To use a perk - ``fancyperks.perk.(perk name)``<br>
 - Lava runner
 
 ## Build from source
+
 1. Clone this repo and run `gradlew reobfJar`
 2. The jar file will be in `build/libs/FancyPerks-<version>.jar`

@@ -47,10 +47,14 @@ public class FancyPerks extends JavaPlugin {
         perkManager = new PerkManager();
         versionFetcher = new VersionFetcher("https://api.modrinth.com/v2/project/fancyperks/version", "https://modrinth.com/plugin/fancyperks/versions");
         fancyScheduler = ServerSoftware.isFolia() ?
-                            new FoliaScheduler(instance) :
-                            new BukkitScheduler(instance);
+                new FoliaScheduler(instance) :
+                new BukkitScheduler(instance);
         config = new FancyPerksConfig();
         usingVault = false;
+    }
+
+    public static FancyPerks getInstance() {
+        return instance;
     }
 
     @Override
@@ -60,7 +64,7 @@ public class FancyPerks extends JavaPlugin {
         new Thread(() -> {
             ComparableVersion newestVersion = versionFetcher.getNewestVersion();
             ComparableVersion currentVersion = new ComparableVersion(getDescription().getVersion());
-            if(newestVersion == null){
+            if (newestVersion == null) {
                 getLogger().warning("Could not fetch latest plugin version");
             } else if (newestVersion.compareTo(currentVersion) > 0) {
                 getLogger().warning("-------------------------------------------------------");
@@ -73,7 +77,7 @@ public class FancyPerks extends JavaPlugin {
 
         PluginManager pluginManager = Bukkit.getPluginManager();
 
-        if(!ServerSoftware.isPaper()){
+        if (!ServerSoftware.isPaper()) {
             getLogger().warning("--------------------------------------------------");
             getLogger().warning("It is recommended to use Paper as server software.");
             getLogger().warning("Because you are not using paper, the plugin");
@@ -82,7 +86,7 @@ public class FancyPerks extends JavaPlugin {
         }
 
         usingVault = pluginManager.getPlugin("Vault") != null;
-        if(usingVault){
+        if (usingVault) {
             RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServicesManager().getRegistration(Economy.class);
             if (economyProvider != null) {
                 vaultEconomy = economyProvider.getProvider();
@@ -103,7 +107,7 @@ public class FancyPerks extends JavaPlugin {
         }
 
         usingLuckPerms = pluginManager.isPluginEnabled("LuckPerms");
-        if(usingLuckPerms){
+        if (usingLuckPerms) {
             RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
             if (provider != null) {
                 luckPerms = provider.getProvider();
@@ -131,7 +135,7 @@ public class FancyPerks extends JavaPlugin {
         pluginManager.registerEvents(new PlayerItemDamageListener(), instance);
         pluginManager.registerEvents(new BlockBreakListener(), instance);
         pluginManager.registerEvents(new PlayerMoveListener(), instance);
-        if(usingLuckPerms && config.isActivatePerkOnPermissionSet()){
+        if (usingLuckPerms && config.isActivatePerkOnPermissionSet()) {
             new LuckPermsListener();
         }
 
@@ -141,7 +145,7 @@ public class FancyPerks extends JavaPlugin {
 
         perkManager.loadFromConfig();
 
-        if(PerkRegistry.LAVA_RUNNER.isEnabled()) {
+        if (PerkRegistry.LAVA_RUNNER.isEnabled()) {
             LavaRunnerPerk lavaRunner = (LavaRunnerPerk) PerkRegistry.LAVA_RUNNER;
             fancyScheduler.runTaskTimerAsynchronously(10, 10, () -> {
                 for (Player player : lavaRunner.getPlayerBlockCache().keySet()) {
@@ -188,9 +192,5 @@ public class FancyPerks extends JavaPlugin {
 
     public LuckPerms getLuckPerms() {
         return luckPerms;
-    }
-
-    public static FancyPerks getInstance() {
-        return instance;
     }
 }

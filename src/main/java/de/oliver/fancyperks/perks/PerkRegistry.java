@@ -60,9 +60,9 @@ public class PerkRegistry {
         registerPerk(LAVA_RUNNER);
     }
 
-    public static Perk getPerkByName(String name){
+    public static Perk getPerkByName(String name) {
         for (Perk perk : ALL_PERKS) {
-            if(perk.getDisplayName().equalsIgnoreCase(name.replaceAll("_", " ")) || perk.getSystemName().equalsIgnoreCase(name)){
+            if (perk.getDisplayName().equalsIgnoreCase(name.replaceAll("_", " ")) || perk.getSystemName().equalsIgnoreCase(name)) {
                 return perk;
             }
         }
@@ -70,7 +70,7 @@ public class PerkRegistry {
         return null;
     }
 
-    public static void registerPerk(Perk perk){
+    public static void registerPerk(Perk perk) {
         ALL_PERKS.add(perk);
     }
 

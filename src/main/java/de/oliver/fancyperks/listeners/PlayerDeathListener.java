@@ -12,31 +12,31 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import java.util.List;
 
 public class PlayerDeathListener implements Listener {
-    
+
     @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent event){
+    public void onPlayerDeath(PlayerDeathEvent event) {
         Player p = event.getPlayer();
-        
+
         PerkManager perkManager = FancyPerks.getInstance().getPerkManager();
         List<Perk> perks = perkManager.getEnabledPerks(p);
 
 
         boolean hasKeepExp = perks.contains(PerkRegistry.KEEP_EXP);
-        if(hasKeepExp){
+        if (hasKeepExp) {
             event.setKeepLevel(true);
             event.setShouldDropExperience(false);
         }
 
         boolean hasKeepInv = perks.contains(PerkRegistry.KEEP_INVENTORY);
-        if(hasKeepInv){
+        if (hasKeepInv) {
             event.setKeepInventory(true);
             event.getDrops().clear();
         }
 
         boolean hasFly = perks.contains(PerkRegistry.FLY);
-        if(hasFly){
+        if (hasFly) {
             p.setAllowFlight(true);
         }
     }
-    
+
 }

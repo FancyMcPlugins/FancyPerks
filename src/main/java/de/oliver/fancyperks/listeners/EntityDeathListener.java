@@ -16,8 +16,8 @@ import java.util.List;
 public class EntityDeathListener implements Listener {
 
     @EventHandler
-    public void onEntityDeath(EntityDeathEvent event){
-        if(event.getEntity().getKiller() == null){
+    public void onEntityDeath(EntityDeathEvent event) {
+        if (event.getEntity().getKiller() == null) {
             return;
         }
 
@@ -27,17 +27,17 @@ public class EntityDeathListener implements Listener {
         List<Perk> perks = perkManager.getEnabledPerks(p);
 
         boolean hasDoubleExp = perks.contains(PerkRegistry.DOUBLE_EXP);
-        if(hasDoubleExp){
+        if (hasDoubleExp) {
             event.setDroppedExp(event.getDroppedExp() * 2);
         }
 
         boolean hasDoubleDrops = perks.contains(PerkRegistry.DOUBLE_DROPS);
-        if(hasDoubleDrops){
+        if (hasDoubleDrops) {
             event.getDrops().forEach(itemStack -> itemStack.setAmount(itemStack.getAmount() * 2));
         }
 
         boolean hasTelekinesis = perks.contains(PerkRegistry.TELEKINESIS);
-        if(hasTelekinesis){
+        if (hasTelekinesis) {
             for (ItemStack drop : event.getDrops()) {
                 HashMap<Integer, ItemStack> couldNotFit = p.getInventory().addItem(drop);
                 for (ItemStack item : couldNotFit.values()) {

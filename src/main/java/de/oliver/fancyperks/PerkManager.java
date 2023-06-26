@@ -20,17 +20,17 @@ public class PerkManager {
         this.playerPerks = new HashMap<>();
     }
 
-    public List<Perk> getEnabledPerks(Player player){
+    public List<Perk> getEnabledPerks(Player player) {
         return playerPerks.getOrDefault(player.getUniqueId(), new ArrayList<>());
     }
 
-    public boolean hasPerkEnabled(Player player, Perk perk){
+    public boolean hasPerkEnabled(Player player, Perk perk) {
         return playerPerks.containsKey(player.getUniqueId()) && playerPerks.get(player.getUniqueId()).contains(perk);
     }
 
-    public void enablePerk(Player player, Perk perk){
+    public void enablePerk(Player player, Perk perk) {
         List<Perk> perks = getEnabledPerks(player);
-        if(!perks.contains(perk)){
+        if (!perks.contains(perk)) {
             perks.add(perk);
         }
 
@@ -46,7 +46,7 @@ public class PerkManager {
         }
     }
 
-    public void disablePerk(Player player, Perk perk){
+    public void disablePerk(Player player, Perk perk) {
         List<Perk> perks = getEnabledPerks(player);
         perks.remove(perk);
 
@@ -62,21 +62,21 @@ public class PerkManager {
         }
     }
 
-    public void loadFromConfig(){
+    public void loadFromConfig() {
         playerPerks.clear();
         YamlConfiguration config = YamlConfiguration.loadConfiguration(playersConfig);
-        if(!config.isConfigurationSection("perks")) return;
+        if (!config.isConfigurationSection("perks")) return;
 
         for (String uuidStr : config.getConfigurationSection("perks").getKeys(false)) {
             UUID uuid = UUID.fromString(uuidStr);
             for (String perkStr : config.getConfigurationSection("perks." + uuidStr).getKeys(false)) {
                 Perk perk = PerkRegistry.getPerkByName(perkStr);
-                if(perk == null){
+                if (perk == null) {
                     continue;
                 }
 
                 boolean isActivated = config.getBoolean("perks." + uuidStr + "." + perkStr, false);
-                if(isActivated){
+                if (isActivated) {
                     List<Perk> current = playerPerks.getOrDefault(uuid, new ArrayList<>());
                     current.add(perk);
                     playerPerks.put(uuid, current);

@@ -2,7 +2,6 @@ package de.oliver.fancyperks.perks.impl;
 
 import de.oliver.fancyperks.perks.Perk;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 
@@ -15,13 +14,13 @@ public class AutoRepairPerk extends Perk {
     public void grant(Player player) {
         super.grant(player);
         for (ItemStack item : player.getInventory().getContents()) {
-            if(item == null){
+            if (item == null) {
                 continue;
             }
 
 
             item.editMeta(itemMeta -> {
-                if(!(itemMeta instanceof Damageable damageable)){
+                if (!(itemMeta instanceof Damageable damageable)) {
                     return;
                 }
 

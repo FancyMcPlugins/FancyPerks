@@ -14,14 +14,14 @@ import java.util.List;
 public class PlayerItemDamageListener implements Listener {
 
     @EventHandler
-    public void onPlayerItemDamage(PlayerItemDamageEvent event){
+    public void onPlayerItemDamage(PlayerItemDamageEvent event) {
         Player p = event.getPlayer();
 
         PerkManager perkManager = FancyPerks.getInstance().getPerkManager();
         List<Perk> perks = perkManager.getEnabledPerks(p);
 
         boolean hasAutoRepair = perks.contains(PerkRegistry.AUTO_REPAIR);
-        if(hasAutoRepair){
+        if (hasAutoRepair) {
             event.setCancelled(true);
         }
     }

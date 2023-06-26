@@ -21,21 +21,21 @@ public class PerksCMD implements CommandExecutor, TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if(args.length == 1){
+        if (args.length == 1) {
             return Stream.of("activate", "deactivate")
                     .filter(input -> input.startsWith(args[0].toLowerCase()))
                     .toList();
-        } else if(args.length == 2){
-            if(args[0].equalsIgnoreCase("activate")){
+        } else if (args.length == 2) {
+            if (args[0].equalsIgnoreCase("activate")) {
                 List<Perk> enabledPerks = FancyPerks.getInstance().getPerkManager().getEnabledPerks((Player) sender);
                 return Stream.concat(
-                        Stream.of("*"),
-                        PerkRegistry.ALL_PERKS.stream()
-                            .filter(perk -> !enabledPerks.contains(perk))
-                            .map(Perk::getSystemName))
-                            .filter(input -> input.startsWith(args[1].toLowerCase()))
-                            .toList();
-            } else if(args[0].equalsIgnoreCase("deactivate")){
+                                Stream.of("*"),
+                                PerkRegistry.ALL_PERKS.stream()
+                                        .filter(perk -> !enabledPerks.contains(perk))
+                                        .map(Perk::getSystemName))
+                        .filter(input -> input.startsWith(args[1].toLowerCase()))
+                        .toList();
+            } else if (args[0].equalsIgnoreCase("deactivate")) {
                 List<Perk> enabledPerks = FancyPerks.getInstance().getPerkManager().getEnabledPerks((Player) sender);
                 return Stream.concat(
                                 Stream.of("*"),
@@ -59,17 +59,16 @@ public class PerksCMD implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Player p = (Player) sender;
 
-        if(args.length == 0){
+        if (args.length == 0) {
             PerksInventory perksInventory = new PerksInventory(p);
             p.openInventory(perksInventory.getInventory());
-        } else if(args.length >= 2 && args[0].equalsIgnoreCase("activate")){
+        } else if (args.length >= 2 && args[0].equalsIgnoreCase("activate")) {
             String perkStr = args[1];
 
-            if(perkStr.equals("*")){
+            if (perkStr.equals("*")) {
                 List<String> activatedPerks = new ArrayList<>();
                 for (Perk perk : PerkRegistry.ALL_PERKS) {
-                    if(perk.hasPermission(p) &&
-                        !FancyPerks.getInstance().getPerkManager().hasPerkEnabled(p, perk)){
+                    if (perk.hasPermission(p) && !FancyPerks.getInstance().getPerkManager().hasPerkEnabled(p, perk)) {
                         perk.grant(p);
                         activatedPerks.add(perk.getDisplayName());
                     }
@@ -81,17 +80,17 @@ public class PerksCMD implements CommandExecutor, TabCompleter {
 
             Perk perk = PerkRegistry.getPerkByName(perkStr);
 
-            if(perk == null){
+            if (perk == null) {
                 MessageHelper.error(p, "Could not find perk with name: '" + perkStr + "'");
                 return false;
             }
 
-            if(FancyPerks.getInstance().getPerkManager().hasPerkEnabled(p, perk)){
+            if (FancyPerks.getInstance().getPerkManager().hasPerkEnabled(p, perk)) {
                 MessageHelper.warning(p, "You already activated this perk");
                 return true;
             }
 
-            if(!perk.hasPermission(p)){
+            if (!perk.hasPermission(p)) {
                 MessageHelper.error(p, "You don't have permission to use this perk");
                 return false;
             }
@@ -99,13 +98,13 @@ public class PerksCMD implements CommandExecutor, TabCompleter {
             perk.grant(p);
             MessageHelper.success(p, "Activated the " + perk.getDisplayName() + " perk");
 
-        } else if(args.length >= 2 && args[0].equalsIgnoreCase("deactivate")){
+        } else if (args.length >= 2 && args[0].equalsIgnoreCase("deactivate")) {
             String perkStr = args[1];
 
-            if(perkStr.equals("*")){
+            if (perkStr.equals("*")) {
                 List<String> deactivatedPerks = new ArrayList<>();
                 for (Perk perk : PerkRegistry.ALL_PERKS) {
-                    if(FancyPerks.getInstance().getPerkManager().hasPerkEnabled(p, perk)){
+                    if (FancyPerks.getInstance().getPerkManager().hasPerkEnabled(p, perk)) {
                         perk.revoke(p);
                         deactivatedPerks.add(perk.getDisplayName());
                     }
@@ -117,12 +116,12 @@ public class PerksCMD implements CommandExecutor, TabCompleter {
 
             Perk perk = PerkRegistry.getPerkByName(perkStr);
 
-            if(perk == null){
+            if (perk == null) {
                 MessageHelper.error(p, "Could not find perk with name: '" + perkStr + "'");
                 return false;
             }
 
-            if(!FancyPerks.getInstance().getPerkManager().hasPerkEnabled(p, perk)){
+            if (!FancyPerks.getInstance().getPerkManager().hasPerkEnabled(p, perk)) {
                 MessageHelper.warning(p, "You already deactivated this perk");
                 return true;
             }

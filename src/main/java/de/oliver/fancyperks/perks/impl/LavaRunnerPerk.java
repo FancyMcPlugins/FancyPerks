@@ -9,21 +9,24 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-public class LavaRunnerPerk extends SimplePerk{
+public class LavaRunnerPerk extends SimplePerk {
     public static final Material BLOCK_TYPE = Material.OBSIDIAN;
-
+    private final Map<Player, PlayerBlockCache> playerBlockCache;
     private int radius;
     private long dissolutionTime;
-    private final Map<Player, PlayerBlockCache> playerBlockCache;
+
     public LavaRunnerPerk(String systemName, String name, String description, ItemStack displayItem) {
         super(systemName, name, description, displayItem);
         playerBlockCache = new HashMap<>();
     }
 
-    public void updateBlocks(Player player){
-        if(!isEnabled()){
+    public void updateBlocks(Player player) {
+        if (!isEnabled()) {
             return;
         }
 
@@ -35,7 +38,7 @@ public class LavaRunnerPerk extends SimplePerk{
         Location playerLoc = player.getLocation();
 
         // check what blocks should be kept
-        if(player.isOnline()) {
+        if (player.isOnline()) {
             for (int dx = -radius; dx < radius; dx++) {
                 for (int dz = -radius; dz < radius; dz++) {
                     for (int dy = 1; dy <= 3; dy++) {
@@ -56,14 +59,14 @@ public class LavaRunnerPerk extends SimplePerk{
 
         // check what blocks should be removed
         for (Location blockLoc : cache.blocks().keySet()) {
-            if(cache.isBlockExpired(blockLoc) && !keep.contains(blockLoc)){
+            if (cache.isBlockExpired(blockLoc) && !keep.contains(blockLoc)) {
                 remove.add(blockLoc);
             }
         }
 
 
         // remove blocks
-        if(remove.size() > 0) {
+        if (remove.size() > 0) {
             FancyPerks.getInstance().getFancyScheduler().runTask(remove.iterator().next(), () -> {
                 for (Location loc : remove) {
                     cache.removeBlock(loc);
@@ -83,7 +86,7 @@ public class LavaRunnerPerk extends SimplePerk{
         }
 
         // place blocks
-        if(keep.size() > 0) {
+        if (keep.size() > 0) {
             FancyPerks.getInstance().getFancyScheduler().runTask(keep.iterator().next(), () -> {
                 for (Location loc : keep) {
                     cache.addBlock(loc);
@@ -113,7 +116,7 @@ public class LavaRunnerPerk extends SimplePerk{
         this.dissolutionTime = dissolutionTime;
     }
 
-    public PlayerBlockCache getCache(Player player){
+    public PlayerBlockCache getCache(Player player) {
         if (playerBlockCache.containsKey(player)) {
             return playerBlockCache.get(player);
         }
@@ -136,8 +139,8 @@ public class LavaRunnerPerk extends SimplePerk{
         }
 
         public void removeBlock(Location location) {
-                blocks.remove(location);
-            }
+            blocks.remove(location);
+        }
 
         public boolean isBlockExpired(Location location) {
             if (!blocks.containsKey(location)) {

@@ -2,7 +2,7 @@ plugins {
     `java-library`
     id("xyz.jpenilla.run-paper") version "2.0.1" // Adds runServer and runMojangMappedServer tasks for testing
     id("maven-publish")
-    id ("com.github.johnrengelman.shadow") version "8.1.1";
+    id("com.github.johnrengelman.shadow") version "8.1.1";
 }
 
 group = "de.oliver"
@@ -34,11 +34,11 @@ dependencies {
 }
 
 tasks {
-    runServer{
+    runServer {
         minecraftVersion(mcVersion)
     }
 
-    shadowJar{
+    shadowJar {
         archiveClassifier.set("")
     }
 

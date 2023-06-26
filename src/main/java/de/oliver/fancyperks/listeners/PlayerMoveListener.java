@@ -15,8 +15,8 @@ import java.util.List;
 public class PlayerMoveListener implements Listener {
 
     @EventHandler
-    public void onPlayerMove(PlayerMoveEvent event){
-        if(!event.hasChangedPosition()){
+    public void onPlayerMove(PlayerMoveEvent event) {
+        if (!event.hasChangedPosition()) {
             return;
         }
 
@@ -26,7 +26,7 @@ public class PlayerMoveListener implements Listener {
         List<Perk> perks = perkManager.getEnabledPerks(p);
 
         boolean hasLavaRunner = perks.contains(PerkRegistry.LAVA_RUNNER);
-        if(hasLavaRunner){
+        if (hasLavaRunner) {
             ((LavaRunnerPerk) PerkRegistry.LAVA_RUNNER).updateBlocks(p);
         }
     }

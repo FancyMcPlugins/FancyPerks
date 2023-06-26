@@ -11,7 +11,7 @@ public class FancyPerksConfig {
     private boolean muteVersionNotification;
     private boolean activatePerkOnPermissionSet;
 
-    public void reload(){
+    public void reload() {
         FancyPerks.getInstance().reloadConfig();
         FileConfiguration config = FancyPerks.getInstance().getConfig();
 
@@ -34,7 +34,7 @@ public class FancyPerksConfig {
             double price = (double) ConfigHelper.getOrDefault(config, "perks." + perk.getSystemName() + ".price", 1000d);
             perk.setPrice(price);
 
-            if(perk instanceof LavaRunnerPerk lavaRunnerPerk){
+            if (perk instanceof LavaRunnerPerk lavaRunnerPerk) {
                 int radius = (int) ConfigHelper.getOrDefault(config, "perks." + perk.getSystemName() + ".radius", 4);
                 int dissolutionTime = (int) ConfigHelper.getOrDefault(config, "perks." + perk.getSystemName() + ".dissolution_time", 3000L);
 

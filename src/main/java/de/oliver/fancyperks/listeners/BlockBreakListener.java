@@ -18,10 +18,10 @@ import java.util.List;
 public class BlockBreakListener implements Listener {
 
     @EventHandler
-    public void onBlockBreak(BlockBreakEvent event){
+    public void onBlockBreak(BlockBreakEvent event) {
         Player p = event.getPlayer();
 
-        if(event.getBlock().hasMetadata("LavaRunner")){
+        if (event.getBlock().hasMetadata("LavaRunner")) {
             event.setCancelled(true);
             event.getBlock().setType(Material.LAVA);
             return;
@@ -31,10 +31,10 @@ public class BlockBreakListener implements Listener {
         List<Perk> perks = perkManager.getEnabledPerks(p);
 
         boolean hasAutoPlanting = perks.contains(PerkRegistry.AUTO_PLANTING);
-        if(hasAutoPlanting){
+        if (hasAutoPlanting) {
             Block block = event.getBlock();
             BlockData blockData = block.getState().getBlockData();
-            if(blockData instanceof Ageable ageable && ageable.getAge() == ageable.getMaximumAge()){
+            if (blockData instanceof Ageable ageable && ageable.getAge() == ageable.getMaximumAge()) {
                 FancyPerks.getInstance().getFancyScheduler().runTaskLater(block.getLocation(), 3L, () -> {
                     block.setType(block.getType());
                     ageable.setAge(0);

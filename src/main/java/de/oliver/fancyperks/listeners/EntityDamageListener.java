@@ -14,8 +14,8 @@ import java.util.List;
 public class EntityDamageListener implements Listener {
 
     @EventHandler
-    public void onEntityDamage(EntityDamageEvent event){
-        if(!(event.getEntity() instanceof Player p)){
+    public void onEntityDamage(EntityDamageEvent event) {
+        if (!(event.getEntity() instanceof Player p)) {
             return;
         }
 
@@ -23,18 +23,18 @@ public class EntityDamageListener implements Listener {
         List<Perk> perks = perkManager.getEnabledPerks(p);
 
         boolean hasGod = perks.contains(PerkRegistry.GOD);
-        if(hasGod){
+        if (hasGod) {
             event.setDamage(0);
             return;
         }
 
         boolean hasNoFireDamage = perks.contains(PerkRegistry.NO_FIRE_DAMAGE);
-        if(hasNoFireDamage && (event.getCause().name().toLowerCase().contains("fire") || event.getCause() == EntityDamageEvent.DamageCause.LAVA)){
+        if (hasNoFireDamage && (event.getCause().name().toLowerCase().contains("fire") || event.getCause() == EntityDamageEvent.DamageCause.LAVA)) {
             event.setDamage(0);
         }
 
         boolean hasNoFallDamage = perks.contains(PerkRegistry.NO_FALL_DAMAGE);
-        if(hasNoFallDamage && event.getCause() == EntityDamageEvent.DamageCause.FALL){
+        if (hasNoFallDamage && event.getCause() == EntityDamageEvent.DamageCause.FALL) {
             event.setDamage(0);
         }
     }

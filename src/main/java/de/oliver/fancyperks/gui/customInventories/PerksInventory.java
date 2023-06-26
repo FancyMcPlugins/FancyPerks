@@ -25,74 +25,7 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
         loadPage(1);
     }
 
-    @Override
-    public void loadPage(int page) {
-        inventory.clear();
-
-        for (int i = 0; i < inventory.getSize(); i++) {
-            inventory.setItem(i, CustomPlayerInventory.getPlaceholder());
-        }
-
-        List<Perk> perks = PerkRegistry.ALL_PERKS.stream().filter(Perk::isEnabled).toList();
-        final int perksPerPage = 2*9;
-        int perkIndex = perksPerPage * Math.max(0, page-1);
-        boolean isLastPage = false;
-
-        rowLoop:
-        for (int row = 0; row < 4; row+=2) {
-            for (int col = 0; col < 9; col++) {
-                int topIndex = row*9+col;
-                int bottomIndex = topIndex+9;
-
-                Perk perk = perks.get(perkIndex);
-                perkIndex++;
-
-                boolean enabled = FancyPerks.getInstance().getPerkManager().hasPerkEnabled(player, perk);
-                boolean hasPermissions = player.hasPermission("FancyPerks.perk." + perk.getSystemName());
-
-                inventory.setItem(topIndex, perk.getDisplayItem());
-
-                if(FancyPerks.getInstance().isUsingVault() && !hasPermissions && perk.isBuyable()){
-                    inventory.setItem(bottomIndex, getBuyPerkItem(perk));
-                } else if(enabled){
-                    inventory.setItem(bottomIndex, getEnabledPerkItem(perk));
-                } else {
-                    inventory.setItem(bottomIndex, getDisabledPerkItem(perk));
-                }
-
-                if(perkIndex >= perks.size()){
-                    isLastPage = true;
-                    break rowLoop;
-                }
-            }
-        }
-
-        if(page > 1) {
-            ItemStack previousPage = new ItemStack(Material.ARROW);
-            previousPage.editMeta(itemMeta -> {
-                itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<gradient:gold:yellow:gold>Previous page</gradient>"), TextDecoration.ITALIC));
-
-                itemMeta.getPersistentDataContainer().set(PageInventory.PAGE_KEY, PersistentDataType.INTEGER, page-1);
-                itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "changePage");
-            });
-
-            inventory.setItem(47, previousPage);
-        }
-
-        if(!isLastPage) {
-            ItemStack nextPage = new ItemStack(Material.ARROW);
-            nextPage.editMeta(itemMeta -> {
-                itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<gradient:gold:yellow:gold>Next page</gradient>"), TextDecoration.ITALIC));
-
-                itemMeta.getPersistentDataContainer().set(PageInventory.PAGE_KEY, PersistentDataType.INTEGER, page+1);
-                itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "changePage");
-            });
-
-            inventory.setItem(51, nextPage);
-        }
-    }
-
-    public static ItemStack getEnabledPerkItem(Perk perk){
+    public static ItemStack getEnabledPerkItem(Perk perk) {
         ItemStack item = new ItemStack(Material.GREEN_DYE);
 
         item.editMeta(itemMeta -> {
@@ -109,7 +42,7 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
         return item;
     }
 
-    public static ItemStack getDisabledPerkItem(Perk perk){
+    public static ItemStack getDisabledPerkItem(Perk perk) {
         ItemStack item = new ItemStack(Material.RED_DYE);
 
         item.editMeta(itemMeta -> {
@@ -126,7 +59,7 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
         return item;
     }
 
-    public static ItemStack getBuyPerkItem(Perk perk){
+    public static ItemStack getBuyPerkItem(Perk perk) {
         ItemStack item = new ItemStack(Material.YELLOW_DYE);
 
         item.editMeta(itemMeta -> {
@@ -143,5 +76,72 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
         });
 
         return item;
+    }
+
+    @Override
+    public void loadPage(int page) {
+        inventory.clear();
+
+        for (int i = 0; i < inventory.getSize(); i++) {
+            inventory.setItem(i, CustomPlayerInventory.getPlaceholder());
+        }
+
+        List<Perk> perks = PerkRegistry.ALL_PERKS.stream().filter(Perk::isEnabled).toList();
+        final int perksPerPage = 2 * 9;
+        int perkIndex = perksPerPage * Math.max(0, page - 1);
+        boolean isLastPage = false;
+
+        rowLoop:
+        for (int row = 0; row < 4; row += 2) {
+            for (int col = 0; col < 9; col++) {
+                int topIndex = row * 9 + col;
+                int bottomIndex = topIndex + 9;
+
+                Perk perk = perks.get(perkIndex);
+                perkIndex++;
+
+                boolean enabled = FancyPerks.getInstance().getPerkManager().hasPerkEnabled(player, perk);
+                boolean hasPermissions = player.hasPermission("FancyPerks.perk." + perk.getSystemName());
+
+                inventory.setItem(topIndex, perk.getDisplayItem());
+
+                if (FancyPerks.getInstance().isUsingVault() && !hasPermissions && perk.isBuyable()) {
+                    inventory.setItem(bottomIndex, getBuyPerkItem(perk));
+                } else if (enabled) {
+                    inventory.setItem(bottomIndex, getEnabledPerkItem(perk));
+                } else {
+                    inventory.setItem(bottomIndex, getDisabledPerkItem(perk));
+                }
+
+                if (perkIndex >= perks.size()) {
+                    isLastPage = true;
+                    break rowLoop;
+                }
+            }
+        }
+
+        if (page > 1) {
+            ItemStack previousPage = new ItemStack(Material.ARROW);
+            previousPage.editMeta(itemMeta -> {
+                itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<gradient:gold:yellow:gold>Previous page</gradient>"), TextDecoration.ITALIC));
+
+                itemMeta.getPersistentDataContainer().set(PageInventory.PAGE_KEY, PersistentDataType.INTEGER, page - 1);
+                itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "changePage");
+            });
+
+            inventory.setItem(47, previousPage);
+        }
+
+        if (!isLastPage) {
+            ItemStack nextPage = new ItemStack(Material.ARROW);
+            nextPage.editMeta(itemMeta -> {
+                itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<gradient:gold:yellow:gold>Next page</gradient>"), TextDecoration.ITALIC));
+
+                itemMeta.getPersistentDataContainer().set(PageInventory.PAGE_KEY, PersistentDataType.INTEGER, page + 1);
+                itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "changePage");
+            });
+
+            inventory.setItem(51, nextPage);
+        }
     }
 }

@@ -18,11 +18,11 @@ import java.util.*;
 public class BlockDropItemListener implements Listener {
 
     private static final EnumMap<Material, Material> instantSmeltBlocks = new EnumMap<>(
-        Map.of(
-            Material.RAW_COPPER, Material.COPPER_INGOT,
-            Material.RAW_GOLD, Material.GOLD_INGOT,
-            Material.RAW_IRON, Material.IRON_INGOT
-        )
+            Map.of(
+                    Material.RAW_COPPER, Material.COPPER_INGOT,
+                    Material.RAW_GOLD, Material.GOLD_INGOT,
+                    Material.RAW_IRON, Material.IRON_INGOT
+            )
     );
 
     @EventHandler
