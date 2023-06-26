@@ -36,7 +36,7 @@ public class FancyPerksConfig {
 
             if (perk instanceof LavaRunnerPerk lavaRunnerPerk) {
                 int radius = (int) ConfigHelper.getOrDefault(config, "perks." + perk.getSystemName() + ".radius", 4);
-                int dissolutionTime = (int) ConfigHelper.getOrDefault(config, "perks." + perk.getSystemName() + ".dissolution_time", 3000L);
+                int dissolutionTime = (int) ConfigHelper.getOrDefault(config, "perks." + perk.getSystemName() + ".dissolution_time", 3000);
 
                 lavaRunnerPerk.setRadius(radius);
                 lavaRunnerPerk.setDissolutionTime(dissolutionTime);
