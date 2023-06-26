@@ -1,6 +1,7 @@
 package de.oliver.fancyperks.perks.impl;
 
 import de.oliver.fancyperks.FancyPerks;
+import de.oliver.fancyperks.perks.PerkRegistry;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -14,6 +15,7 @@ public class LavaRunnerPerk extends SimplePerk{
     public static final Material BLOCK_TYPE = Material.OBSIDIAN;
 
     private int radius;
+    private long dissolutionTime;
     private final Map<Player, PlayerBlockCache> playerBlockCache;
     public LavaRunnerPerk(String systemName, String name, String description, ItemStack displayItem) {
         super(systemName, name, description, displayItem);
@@ -103,6 +105,14 @@ public class LavaRunnerPerk extends SimplePerk{
         this.radius = radius;
     }
 
+    public long getDissolutionTime() {
+        return dissolutionTime;
+    }
+
+    public void setDissolutionTime(long dissolutionTime) {
+        this.dissolutionTime = dissolutionTime;
+    }
+
     public PlayerBlockCache getCache(Player player){
         if (playerBlockCache.containsKey(player)) {
             return playerBlockCache.get(player);
@@ -118,26 +128,26 @@ public class LavaRunnerPerk extends SimplePerk{
     }
 
     public record PlayerBlockCache(HashMap<Location, Long> blocks) {
-        public static final long KEEP_BLOCK_DURATION = 1000L * 3L;
 
         public void addBlock(Location location) {
-                long current = System.currentTimeMillis();
-                blocks.put(location, current + KEEP_BLOCK_DURATION);
-            }
+            long current = System.currentTimeMillis();
+            long dissolutionTime = ((LavaRunnerPerk) PerkRegistry.LAVA_RUNNER).getDissolutionTime();
+            blocks.put(location, current + dissolutionTime);
+        }
 
-            public void removeBlock(Location location) {
+        public void removeBlock(Location location) {
                 blocks.remove(location);
             }
 
-            public boolean isBlockExpired(Location location) {
-                if (!blocks.containsKey(location)) {
-                    return false;
-                }
-
-                long end = blocks.get(location);
-                long current = System.currentTimeMillis();
-
-                return current >= end;
+        public boolean isBlockExpired(Location location) {
+            if (!blocks.containsKey(location)) {
+                return false;
             }
+
+            long end = blocks.get(location);
+            long current = System.currentTimeMillis();
+
+            return current >= end;
         }
+    }
 }
