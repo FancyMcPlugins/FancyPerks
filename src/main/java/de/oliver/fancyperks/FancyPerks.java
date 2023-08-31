@@ -135,6 +135,7 @@ public class FancyPerks extends JavaPlugin {
         pluginManager.registerEvents(new PlayerItemDamageListener(), instance);
         pluginManager.registerEvents(new BlockBreakListener(), instance);
         pluginManager.registerEvents(new PlayerMoveListener(), instance);
+        pluginManager.registerEvents(new PlayerChangedWorldListener(), instance);
         if (usingLuckPerms && config.isActivatePerkOnPermissionSet()) {
             new LuckPermsListener();
         }
