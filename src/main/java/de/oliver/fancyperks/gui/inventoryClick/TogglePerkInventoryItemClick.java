@@ -57,7 +57,11 @@ public class TogglePerkInventoryItemClick implements InventoryItemClick {
                     return;
                 }
 
-                perk.grant(p);
+                if(!perk.grant(p)){
+                    MessageHelper.warning(player, "The " + perk.getSystemName() + " perk is disabled in this world");
+                    return;
+                }
+
                 event.setCurrentItem(PerksInventory.getEnabledPerkItem(perk));
             }
         }

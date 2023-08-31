@@ -2,11 +2,12 @@ package de.oliver.fancyperks;
 
 import de.oliver.fancylib.FancyLib;
 import de.oliver.fancylib.Metrics;
-import de.oliver.fancylib.VersionFetcher;
-import de.oliver.fancylib.serverSoftware.FoliaScheduler;
 import de.oliver.fancylib.serverSoftware.ServerSoftware;
 import de.oliver.fancylib.serverSoftware.schedulers.BukkitScheduler;
 import de.oliver.fancylib.serverSoftware.schedulers.FancyScheduler;
+import de.oliver.fancylib.serverSoftware.schedulers.FoliaScheduler;
+import de.oliver.fancylib.versionFetcher.MasterVersionFetcher;
+import de.oliver.fancylib.versionFetcher.VersionFetcher;
 import de.oliver.fancyperks.commands.FancyPerksCMD;
 import de.oliver.fancyperks.commands.PerksCMD;
 import de.oliver.fancyperks.gui.inventoryClick.BuyPerkInventoryItemClick;
@@ -42,10 +43,9 @@ public class FancyPerks extends JavaPlugin {
 
     public FancyPerks() {
         instance = this;
-//        loadDependencies();
 
         perkManager = new PerkManager();
-        versionFetcher = new VersionFetcher("https://api.modrinth.com/v2/project/fancyperks/version", "https://modrinth.com/plugin/fancyperks/versions");
+        versionFetcher = new MasterVersionFetcher("FancyPerks");
         fancyScheduler = ServerSoftware.isFolia() ?
                 new FoliaScheduler(instance) :
                 new BukkitScheduler(instance);
@@ -62,7 +62,7 @@ public class FancyPerks extends JavaPlugin {
         FancyLib.setPlugin(this);
 
         new Thread(() -> {
-            ComparableVersion newestVersion = versionFetcher.getNewestVersion();
+            ComparableVersion newestVersion = versionFetcher.fetchNewestVersion();
             ComparableVersion currentVersion = new ComparableVersion(getDescription().getVersion());
             if (newestVersion == null) {
                 getLogger().warning("Could not fetch latest plugin version");

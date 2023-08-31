@@ -37,7 +37,10 @@ public class LuckPermsListener {
             }
 
             if (event.getNode().getValue() && perk.hasPermission(p)) {
-                perk.grant(p);
+                if(!perk.grant(p)){
+                    MessageHelper.warning(p, "The " + perk.getSystemName() + " perk is disabled in this world");
+                    return;
+                }
                 MessageHelper.success(p, "Automatically enabled the " + perk.getDisplayName() + " perk");
             } else if (!perk.hasPermission(p)) {
                 perk.revoke(p);

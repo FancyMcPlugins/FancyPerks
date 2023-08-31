@@ -11,8 +11,9 @@ public class AutoRepairPerk extends Perk {
     }
 
     @Override
-    public void grant(Player player) {
-        super.grant(player);
+    public boolean grant(Player player) {
+        if(!super.grant(player)) return false;
+
         for (ItemStack item : player.getInventory().getContents()) {
             if (item == null) {
                 continue;
@@ -27,6 +28,8 @@ public class AutoRepairPerk extends Perk {
                 damageable.setDamage(0);
             });
         }
+
+        return true;
     }
 
     @Override

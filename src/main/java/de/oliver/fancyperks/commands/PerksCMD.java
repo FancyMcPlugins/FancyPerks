@@ -69,7 +69,10 @@ public class PerksCMD implements CommandExecutor, TabCompleter {
                 List<String> activatedPerks = new ArrayList<>();
                 for (Perk perk : PerkRegistry.ALL_PERKS) {
                     if (perk.hasPermission(p) && !FancyPerks.getInstance().getPerkManager().hasPerkEnabled(p, perk)) {
-                        perk.grant(p);
+                        if(!perk.grant(p)){
+                            MessageHelper.warning(p, "The " + perk.getSystemName() + " perk is disabled in this world");
+                            continue;
+                        }
                         activatedPerks.add(perk.getDisplayName());
                     }
                 }
@@ -95,7 +98,11 @@ public class PerksCMD implements CommandExecutor, TabCompleter {
                 return false;
             }
 
-            perk.grant(p);
+            if(!perk.grant(p)){
+                MessageHelper.warning(p, "The " + perk.getSystemName() + " perk is disabled in this world");
+                return false;
+            }
+
             MessageHelper.success(p, "Activated the " + perk.getDisplayName() + " perk");
 
         } else if (args.length >= 2 && args[0].equalsIgnoreCase("deactivate")) {

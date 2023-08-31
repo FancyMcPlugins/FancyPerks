@@ -11,7 +11,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public abstract class Perk {
 
@@ -24,6 +26,7 @@ public abstract class Perk {
     protected String displayName;
     protected String description;
     protected boolean enabled;
+    protected List<String> disabledWorlds;
     protected boolean buyable;
     protected double price;
 
@@ -33,6 +36,7 @@ public abstract class Perk {
         this.description = description;
         this.displayItem = displayItem;
         this.enabled = true;
+        this.disabledWorlds = new ArrayList<>();
         this.buyable = false;
     }
 
@@ -44,8 +48,14 @@ public abstract class Perk {
         return player.hasPermission("fancyperks.perk." + systemName);
     }
 
-    public void grant(Player player) {
+    public boolean grant(Player player) {
+        if(disabledWorlds.contains(player.getWorld().getName())){
+            return false;
+        }
+
         perkManager.enablePerk(player, this);
+
+        return true;
     }
 
     public void revoke(Player player) {
@@ -94,6 +104,14 @@ public abstract class Perk {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public List<String> getDisabledWorlds() {
+        return disabledWorlds;
+    }
+
+    public void setDisabledWorlds(List<String> disabledWorlds) {
+        this.disabledWorlds = disabledWorlds;
     }
 
     public boolean isBuyable() {

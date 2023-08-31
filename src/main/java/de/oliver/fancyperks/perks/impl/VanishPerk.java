@@ -12,14 +12,18 @@ public class VanishPerk extends Perk {
     }
 
     @Override
-    public void grant(Player player) {
-        super.grant(player);
+    public boolean grant(Player player) {
+        if(!super.grant(player)) return false;
+
         FancyPerks.getInstance().getServer().getOnlinePlayers().forEach(otherPlayer -> {
             if (!otherPlayer.hasPermission("FancyPerks.seevanished")) {
                 otherPlayer.hidePlayer(FancyPerks.getInstance(), player);
             }
         });
+
         player.setMetadata("vanished", new FixedMetadataValue(FancyPerks.getInstance(), true));
+
+        return true;
     }
 
     @Override

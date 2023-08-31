@@ -16,9 +16,11 @@ public class EffectPerk extends Perk {
     }
 
     @Override
-    public void grant(Player player) {
-        super.grant(player);
+    public boolean grant(Player player) {
+        if(!super.grant(player)) return false;
+
         player.addPotionEffect(new PotionEffect(effectType, -1, 0, true, false, false));
+        return true;
     }
 
     @Override

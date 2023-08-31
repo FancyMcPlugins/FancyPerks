@@ -24,7 +24,7 @@ public class PlayerJoinListener implements Listener {
 
         if (!FancyPerks.getInstance().getFanyPerksConfig().isMuteVersionNotification() && event.getPlayer().hasPermission("FancyPerks.admin")) {
             new Thread(() -> {
-                ComparableVersion newestVersion = FancyPerks.getInstance().getVersionFetcher().getNewestVersion();
+                ComparableVersion newestVersion = FancyPerks.getInstance().getVersionFetcher().fetchNewestVersion();
                 ComparableVersion currentVersion = new ComparableVersion(FancyPerks.getInstance().getDescription().getVersion());
                 if (newestVersion != null && newestVersion.compareTo(currentVersion) > 0) {
                     MessageHelper.warning(event.getPlayer(), "You are using an outdated version of the FancyPerks Plugin");
@@ -44,6 +44,11 @@ public class PlayerJoinListener implements Listener {
         List<Perk> perks = perkManager.getEnabledPerks(event.getPlayer());
 
         for (Perk perk : perks) {
+            if(perk.getDisabledWorlds().contains(p.getWorld().getName())){
+                MessageHelper.warning(p, "The " + perk.getSystemName() + " perk is disabled in this world");
+                continue;
+            }
+
             if (perk instanceof EffectPerk effectPerk) {
                 p.addPotionEffect(new PotionEffect(effectPerk.getEffectType(), -1, 0, true, false, false));
             } else if (perk instanceof FlyPerk) {

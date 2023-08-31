@@ -6,6 +6,9 @@ import de.oliver.fancyperks.perks.PerkRegistry;
 import de.oliver.fancyperks.perks.impl.LavaRunnerPerk;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FancyPerksConfig {
 
     private boolean muteVersionNotification;
@@ -27,6 +30,9 @@ public class FancyPerksConfig {
 
             boolean isEnabled = (boolean) ConfigHelper.getOrDefault(config, "perks." + perk.getSystemName() + ".enabled", true);
             perk.setEnabled(isEnabled);
+
+            List<String> disabledWorlds = (List<String>) ConfigHelper.getOrDefault(config, "perks." + perk.getSystemName() + ".disabled_worlds", new ArrayList<>());
+            perk.setDisabledWorlds(disabledWorlds);
 
             boolean buyable = (boolean) ConfigHelper.getOrDefault(config, "perks." + perk.getSystemName() + ".buyable", true);
             perk.setBuyable(buyable);

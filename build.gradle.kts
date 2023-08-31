@@ -26,7 +26,7 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:$mcVersion-R0.1-SNAPSHOT")
 
-    implementation("de.oliver:FancyLib:1.0.2")
+    implementation("de.oliver:FancyLib:1.0.4")
 
     compileOnly("net.kyori:adventure-text-minimessage:4.13.1")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")

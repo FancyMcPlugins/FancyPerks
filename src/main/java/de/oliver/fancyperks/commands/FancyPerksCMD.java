@@ -30,7 +30,7 @@ public class FancyPerksCMD implements CommandExecutor, TabCompleter {
         if (args.length >= 1 && args[0].equalsIgnoreCase("version")) {
             MessageHelper.info(sender, "<i>Checking version, please wait...</i>");
             new Thread(() -> {
-                ComparableVersion newestVersion = FancyPerks.getInstance().getVersionFetcher().getNewestVersion();
+                ComparableVersion newestVersion = FancyPerks.getInstance().getVersionFetcher().fetchNewestVersion();
                 ComparableVersion currentVersion = new ComparableVersion(FancyPerks.getInstance().getDescription().getVersion());
                 if (newestVersion == null) {
                     MessageHelper.error(sender, "Could not find latest version");
