@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class LavaRunnerPerk extends SimplePerk {
     public static final Material BLOCK_TYPE = Material.OBSIDIAN;
@@ -22,7 +23,7 @@ public class LavaRunnerPerk extends SimplePerk {
 
     public LavaRunnerPerk(String systemName, String name, String description, ItemStack displayItem) {
         super(systemName, name, description, displayItem);
-        playerBlockCache = new HashMap<>();
+        playerBlockCache = new ConcurrentHashMap<>();
     }
 
     public void updateBlocks(Player player) {
