@@ -4,6 +4,7 @@ import de.oliver.fancyperks.FancyPerks;
 import de.oliver.fancyperks.PerkManager;
 import de.oliver.fancyperks.perks.Perk;
 import de.oliver.fancyperks.perks.PerkRegistry;
+import de.oliver.fancyperks.perks.impl.DoubleDropsPerk;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -32,7 +33,7 @@ public class EntityDeathListener implements Listener {
         }
 
         boolean hasDoubleDrops = perks.contains(PerkRegistry.DOUBLE_DROPS);
-        if (hasDoubleDrops) {
+        if (hasDoubleDrops && !((DoubleDropsPerk) PerkRegistry.DOUBLE_DROPS).getBlacklist().contains(event.getEntityType())) {
             event.getDrops().forEach(itemStack -> itemStack.setAmount(itemStack.getAmount() * 2));
         }
 

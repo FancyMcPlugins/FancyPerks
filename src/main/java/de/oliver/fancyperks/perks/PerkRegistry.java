@@ -25,7 +25,7 @@ public class PerkRegistry {
     public static final Perk GOD = new SimplePerk("god", "God", "Don't get any damage", new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
     public static final Perk MOBS_IGNORE = new SimplePerk("mobs_ignore", "Mobs ignore", "Mobs don't notice you anymore", new ItemStack(Material.ZOMBIE_SPAWN_EGG));
     public static final Perk DOUBLE_EXP = new SimplePerk("double_exp", "Double Exp", "Receive double exp for killing monsters", new ItemStack(Material.EXPERIENCE_BOTTLE));
-    public static final Perk DOUBLE_DROPS = new SimplePerk("double_mob_drops", "Double Mob Drops", "Receive double drops for killing Mobs", new ItemStack(Material.ROTTEN_FLESH));
+    public static final Perk DOUBLE_DROPS = new DoubleDropsPerk("double_mob_drops", "Double Mob Drops", "Receive double drops for killing Mobs", new ItemStack(Material.ROTTEN_FLESH));
     public static final Perk VANISH = new VanishPerk("vanish", "Vanish", "Hide from all players", new ItemStack(Material.ENDER_PEARL));
     public static final Perk TELEKINESIS = new SimplePerk("telekinesis", "Telekinesis", "Automatically pick ups items", new ItemStack(Material.GOLDEN_PICKAXE));
     public static final Perk INSTANT_SMELT = new SimplePerk("instant_smelt", "Instant smelt", "Automatically smelts ores", new ItemStack(Material.IRON_ORE));

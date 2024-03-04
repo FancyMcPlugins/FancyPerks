@@ -3,11 +3,14 @@ package de.oliver.fancyperks;
 import de.oliver.fancylib.ConfigHelper;
 import de.oliver.fancyperks.perks.Perk;
 import de.oliver.fancyperks.perks.PerkRegistry;
+import de.oliver.fancyperks.perks.impl.DoubleDropsPerk;
 import de.oliver.fancyperks.perks.impl.LavaRunnerPerk;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.EntityType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FancyPerksConfig {
 
@@ -46,6 +49,19 @@ public class FancyPerksConfig {
 
                 lavaRunnerPerk.setRadius(radius);
                 lavaRunnerPerk.setDissolutionTime(dissolutionTime);
+            }
+
+            if(perk instanceof DoubleDropsPerk doubleDropsPerk) {
+                if(!config.isList("perks." + perk.getSystemName() + ".blacklist")) {
+                    doubleDropsPerk.addToBlacklist(EntityType.PLAYER);
+                    config.set("perks." + perk.getSystemName() + ".blacklist", List.of("PLAYER"));
+                } else {
+                    List<String> blacklist = config.getStringList("perks." + perk.getSystemName() + ".blacklist");
+                    for (String s : blacklist) {
+                        EntityType entityType = EntityType.valueOf(s.toUpperCase());
+                        doubleDropsPerk.addToBlacklist(entityType);
+                    }
+                }
             }
         }
 
