@@ -122,7 +122,7 @@ public class LavaRunnerPerk extends SimplePerk {
             return playerBlockCache.get(player);
         }
 
-        PlayerBlockCache cache = new PlayerBlockCache(new HashMap<>());
+        PlayerBlockCache cache = new PlayerBlockCache(new ConcurrentHashMap<>());
         playerBlockCache.put(player, cache);
         return cache;
     }
@@ -131,7 +131,7 @@ public class LavaRunnerPerk extends SimplePerk {
         return playerBlockCache;
     }
 
-    public record PlayerBlockCache(HashMap<Location, Long> blocks) {
+    public record PlayerBlockCache(Map<Location, Long> blocks) {
 
         public void addBlock(Location location) {
             long current = System.currentTimeMillis();

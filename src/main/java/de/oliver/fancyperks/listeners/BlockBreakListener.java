@@ -21,9 +21,9 @@ public class BlockBreakListener implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         Player p = event.getPlayer();
 
-        if (event.getBlock().hasMetadata("LavaRunner")) {
+        if (event.getBlock().hasMetadata("LavaRunner") && event.getBlock().getType() == Material.OBSIDIAN){
             event.setCancelled(true);
-            event.getBlock().setType(Material.LAVA);
+            event.getBlock().setType(Material.OBSIDIAN);
             return;
         }
 
