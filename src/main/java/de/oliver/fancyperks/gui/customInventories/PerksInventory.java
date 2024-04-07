@@ -1,5 +1,6 @@
 package de.oliver.fancyperks.gui.customInventories;
 
+import de.oliver.fancylib.LanguageConfig;
 import de.oliver.fancylib.MessageHelper;
 import de.oliver.fancylib.gui.customInventories.CustomPlayerInventory;
 import de.oliver.fancylib.gui.customInventories.PageInventory;
@@ -19,6 +20,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PerksInventory extends CustomPlayerInventory implements PageInventory {
+
+    private final static LanguageConfig lang = FancyPerks.getInstance().getLanguageConfig();
+
     public PerksInventory(Player player) {
         super(player, 6, MiniMessage.miniMessage().deserialize("Perks"));
 
@@ -29,10 +33,10 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
         ItemStack item = new ItemStack(Material.GREEN_DYE);
 
         item.editMeta(itemMeta -> {
-            itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<gradient:dark_green:green>Perk is enabled</gradient>"), TextDecoration.ITALIC));
+            itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize(lang.get("gui_perk_is_enabled")), TextDecoration.ITALIC));
             itemMeta.lore(Arrays.asList(
                     Component.empty(),
-                    MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<yellow>Click to toggle</yellow>"), TextDecoration.ITALIC)
+                    MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize(lang.get("gui_click_to_toggle")), TextDecoration.ITALIC)
             ));
 
             itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "togglePerk");
@@ -46,10 +50,10 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
         ItemStack item = new ItemStack(Material.RED_DYE);
 
         item.editMeta(itemMeta -> {
-            itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<gradient:dark_red:red>Perk is disabled</gradient>"), TextDecoration.ITALIC));
+            itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize(lang.get("gui_perk_is_disabled")), TextDecoration.ITALIC));
             itemMeta.lore(Arrays.asList(
                     Component.empty(),
-                    MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<yellow>Click to toggle</yellow>"), TextDecoration.ITALIC)
+                    MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize(lang.get("gui_click_to_toggle")), TextDecoration.ITALIC)
             ));
 
             itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "togglePerk");
@@ -63,12 +67,12 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
         ItemStack item = new ItemStack(Material.YELLOW_DYE);
 
         item.editMeta(itemMeta -> {
-            itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<gradient:gold:yellow>You don't own this perk</gradient>"), TextDecoration.ITALIC));
+            itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize(lang.get("gui_you_dont_own_this_perk")), TextDecoration.ITALIC));
             itemMeta.lore(Arrays.asList(
                     Component.empty(),
-                    MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<yellow>Price: $" + perk.getPrice() + "</yellow>"), TextDecoration.ITALIC),
+                    MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize(lang.get("gui_price", "price", String.valueOf(perk.getPrice()))), TextDecoration.ITALIC),
                     Component.empty(),
-                    MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<yellow>Click to buy</yellow>"), TextDecoration.ITALIC)
+                    MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize(lang.get("gui_click_to_buy")), TextDecoration.ITALIC)
             ));
 
             itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "buyPerk");
@@ -123,7 +127,7 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
         if (page > 1) {
             ItemStack previousPage = new ItemStack(Material.ARROW);
             previousPage.editMeta(itemMeta -> {
-                itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<gradient:gold:yellow:gold>Previous page</gradient>"), TextDecoration.ITALIC));
+                itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize(lang.get("gui_previous_page")), TextDecoration.ITALIC));
 
                 itemMeta.getPersistentDataContainer().set(PageInventory.PAGE_KEY, PersistentDataType.INTEGER, page - 1);
                 itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "changePage");
@@ -135,7 +139,7 @@ public class PerksInventory extends CustomPlayerInventory implements PageInvento
         if (!isLastPage) {
             ItemStack nextPage = new ItemStack(Material.ARROW);
             nextPage.editMeta(itemMeta -> {
-                itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize("<gradient:gold:yellow:gold>Next page</gradient>"), TextDecoration.ITALIC));
+                itemMeta.displayName(MessageHelper.removeDecoration(MiniMessage.miniMessage().deserialize(lang.get("gui_next_page")), TextDecoration.ITALIC));
 
                 itemMeta.getPersistentDataContainer().set(PageInventory.PAGE_KEY, PersistentDataType.INTEGER, page + 1);
                 itemMeta.getPersistentDataContainer().set(InventoryItemClick.ON_CLICK_KEY, PersistentDataType.STRING, "changePage");

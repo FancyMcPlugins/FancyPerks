@@ -43,6 +43,7 @@ public class FancyPerksCMD implements CommandExecutor, TabCompleter {
             }).start();
         } else if (args.length >= 1 && args[0].equalsIgnoreCase("reload")) {
             FancyPerks.getInstance().getFanyPerksConfig().reload();
+            FancyPerks.getInstance().getLanguageConfig().load();
             MessageHelper.success(sender, "Reloaded the config");
         }
 

@@ -1,6 +1,7 @@
 package de.oliver.fancyperks;
 
 import de.oliver.fancylib.FancyLib;
+import de.oliver.fancylib.LanguageConfig;
 import de.oliver.fancylib.Metrics;
 import de.oliver.fancylib.serverSoftware.ServerSoftware;
 import de.oliver.fancylib.serverSoftware.schedulers.BukkitScheduler;
@@ -35,6 +36,7 @@ public class FancyPerks extends JavaPlugin {
     private final VersionFetcher versionFetcher;
     private final FancyScheduler fancyScheduler;
     private final FancyPerksConfig config;
+    private final LanguageConfig languageConfig;
     private boolean usingVault;
     private Economy vaultEconomy;
     private Permission vaultPermission;
@@ -50,6 +52,7 @@ public class FancyPerks extends JavaPlugin {
                 new FoliaScheduler(instance) :
                 new BukkitScheduler(instance);
         config = new FancyPerksConfig();
+        languageConfig = new LanguageConfig(instance);
         usingVault = false;
     }
 
@@ -121,6 +124,16 @@ public class FancyPerks extends JavaPlugin {
 
         config.reload();
 
+        languageConfig.addDefaultLang("gui_perk_is_enabled", "<gradient:dark_green:green>Perk is enabled</gradient>");
+        languageConfig.addDefaultLang("gui_perk_is_disabled", "<gradient:dark_red:red>Perk is disabled</gradient>");
+        languageConfig.addDefaultLang("gui_click_to_toggle", "<yellow>Click to toggle</yellow>");
+        languageConfig.addDefaultLang("gui_you_dont_own_this_perk", "<gradient:gold:yellow>You don't own this perk</gradient>");
+        languageConfig.addDefaultLang("gui_price", "<yellow>Price: ${price}</yellow>");
+        languageConfig.addDefaultLang("gui_click_to_buy", "<yellow>Click to buy</yellow>");
+        languageConfig.addDefaultLang("gui_previous_page", "<yellow>Previous page</yellow>");
+        languageConfig.addDefaultLang("gui_next_page", "<yellow>Next page</yellow>");
+        languageConfig.load();
+
         getCommand("fancyperks").setExecutor(new FancyPerksCMD());
         getCommand("perks").setExecutor(new PerksCMD());
 
@@ -173,6 +186,10 @@ public class FancyPerks extends JavaPlugin {
 
     public FancyPerksConfig getFanyPerksConfig() {
         return config;
+    }
+
+    public LanguageConfig getLanguageConfig() {
+        return languageConfig;
     }
 
     public boolean isUsingVault() {
