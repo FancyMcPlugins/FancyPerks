@@ -7,6 +7,12 @@
 
 # Fancy Perks
 
+**-------------------------------------------**
+
+**This plugin is no longer being supported, developed and maintained. There will be only updates for real high critical security issues. Do not expect any new feature or bug fixed.**
+
+**-------------------------------------------**
+
 A simple plugin that adds some fancy perks to your server.
 
 **Only supported for 1.20** _(might work in other version too tho)_<br>
